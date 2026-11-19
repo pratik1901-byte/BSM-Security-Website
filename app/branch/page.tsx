@@ -95,7 +95,7 @@ export default function BranchPage() {
             <article
               key={office.id}
               data-stagger-item
-              className="card card-void card-still flex flex-col p-5 md:p-6 lg:p-[clamp(1.1rem,2.8svh,1.75rem)]"
+              className="card card-void card-still flex min-w-0 flex-col p-5 md:p-6 lg:p-[clamp(1.1rem,2.8svh,1.75rem)]"
             >
               <div className="flex items-start gap-4">
                 <span className="icon-tile !h-12 !w-12 !rounded-2xl">
@@ -177,7 +177,7 @@ export default function BranchPage() {
           className="mt-4 grid gap-px overflow-hidden rounded-[1.25rem] border border-white/[0.06] bg-white/[0.06] sm:grid-cols-3"
           data-reveal="up"
         >
-          <div className="flex items-center gap-3 bg-void px-5 py-[clamp(0.85rem,2.2svh,1.25rem)]">
+          <div className="flex min-w-0 items-center gap-3 bg-void px-5 py-[clamp(0.85rem,2.2svh,1.25rem)]">
             <Clock className="h-4 w-4 shrink-0 text-brass" strokeWidth={1.5} />
             <div>
               <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-dim">Office hours</dt>
@@ -186,18 +186,18 @@ export default function BranchPage() {
               </dd>
             </div>
           </div>
-          <div className="flex items-center gap-3 bg-void px-5 py-[clamp(0.85rem,2.2svh,1.25rem)]">
+          <div className="flex min-w-0 items-center gap-3 bg-void px-5 py-[clamp(0.85rem,2.2svh,1.25rem)]">
             <ShieldCheck className="h-4 w-4 shrink-0 text-brass" strokeWidth={1.5} />
             <div>
               <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-dim">Services available</dt>
               <dd className="mt-0.5 text-sm font-medium text-bone">{site.contact.servicesAvailable}</dd>
             </div>
           </div>
-          <div className="flex items-center gap-3 bg-void px-5 py-[clamp(0.85rem,2.2svh,1.25rem)]">
+          <div className="flex min-w-0 items-center gap-3 bg-void px-5 py-[clamp(0.85rem,2.2svh,1.25rem)]">
             <Phone className="h-4 w-4 shrink-0 text-brass" strokeWidth={1.5} />
             <div className="min-w-0">
               <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-dim">General enquiries</dt>
-              <dd className="mt-0.5 truncate text-sm font-medium text-bone">
+              <dd className="mt-0.5 break-words text-sm font-medium text-bone">
                 <a href={site.contact.phoneHref} className="hover:text-brass">{site.contact.phone}</a>
                 <span className="text-dim"> · </span>
                 <a href={site.contact.emailHref} className="hover:text-brass">{site.contact.email}</a>
@@ -326,7 +326,7 @@ function OfficeBlock({ office, tinted }: { office: Office; tinted: boolean }) {
 
       {/* ---- Contact details beside a large, readable map ---------------- */}
       <div className="mt-12 grid gap-5 lg:grid-cols-12">
-        <div className="flex flex-col gap-5 lg:col-span-5" data-reveal="up">
+        <div className="flex min-w-0 flex-col gap-5 lg:col-span-5" data-reveal="up">
           {shot.src && (
             <MediaFrame
               shot={shot}
@@ -388,7 +388,7 @@ function OfficeBlock({ office, tinted }: { office: Office; tinted: boolean }) {
           </div>
         </div>
 
-        <div className="lg:col-span-7" data-reveal="fade">
+        <div className="min-w-0 lg:col-span-7" data-reveal="fade">
           <MapEmbed
             src={office.mapEmbed}
             title={office.mapTitle}
@@ -419,7 +419,7 @@ function OfficeBlock({ office, tinted }: { office: Office; tinted: boolean }) {
             <article
               key={person.name}
               data-stagger-item
-              className={`card card-still ${surface} flex flex-col p-6 ${person.advisory ? "card-feature" : ""}`}
+              className={`card card-still ${surface} flex min-w-0 flex-col p-6 ${person.advisory ? "card-feature" : ""}`}
             >
               <div className="flex items-start gap-4">
                 {portrait?.src ? (
