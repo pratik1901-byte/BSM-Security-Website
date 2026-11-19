@@ -111,7 +111,7 @@ export default function Footer() {
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brass" strokeWidth={1.5} />
                 <span className="flex min-w-0 flex-col gap-3">
                   <span className="flex min-w-0 flex-col gap-1">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-dim">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-brass">
                       {offices[0].kind}
                     </span>
                     <a href={offices[0].email.href} className="break-all text-mist hover:text-bone">
@@ -122,7 +122,7 @@ export default function Footer() {
                     </a>
                   </span>
                   <span className="flex min-w-0 flex-col gap-1">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-dim">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-brass">
                       {offices[1].kind}
                     </span>
                     <a href={offices[1].email.href} className="break-all text-mist hover:text-bone">

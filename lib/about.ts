@@ -11,6 +11,9 @@ export const legacyMarks = [
   "DGR-sponsored security agency",
   "DGR-sponsored agency",
   "DGR sponsorship tenure",
+  /* The whole sentence: longest-first ordering in <Marked> means it wins over
+     the shorter DGR phrase inside it, rather than the two splitting it. */
+  "Following the completion of its DGR sponsorship tenure upon attaining the prescribed age of 60 years, the agency transitioned into an independent private security agency under a Partnership Deed, with Mr. Dattatray B. Naik as the Principal Partner.",
   "with a focus on providing professional security services to reputed organisations",
   "Public Sector Undertakings (PSUs), government establishments and major industries",
 ] as const;

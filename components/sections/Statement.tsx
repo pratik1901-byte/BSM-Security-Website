@@ -34,13 +34,13 @@ export default function Statement() {
           </h2>
 
           <div className="mt-12 grid gap-10 md:grid-cols-2">
-            <p data-reveal="up" className="text-lead text-mist">
+            <p data-reveal="up" className="text-lead text-justify text-mist">
               Goa is a state of extremes — a beachfront property in peak season and the same
               property in monsoon are two different security problems. A gated community, an
               industrial estate and a hotel lobby each demand different judgement from the person
               standing at the door.
             </p>
-            <p data-reveal="up" data-delay="0.08" className="text-lead text-mist">
+            <p data-reveal="up" data-delay="0.08" className="text-lead text-justify text-mist">
               We plan for that difference before anyone is deployed: a site survey, a written
               deployment plan, personnel matched to the environment, and supervision that verifies
               the plan is actually being followed at three in the morning.

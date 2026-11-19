@@ -72,7 +72,7 @@ export default function ServicesOverview() {
           </h2>
         </div>
         <div className="flex items-end lg:col-span-6 lg:col-start-7">
-          <p data-reveal="up" className="text-lead text-mist">
+          <p data-reveal="up" className="text-lead text-justify text-mist">
             Ten service categories. Each one starts from the same place — a survey of your site
             and a written plan — and ends with personnel who know that specific gate, lobby or
             perimeter.
