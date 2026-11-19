@@ -101,6 +101,25 @@ export type Service = {
  * BSM's service categories, supplied by BSM and reproduced verbatim —
  * headings and bullet points are not reworded, reordered or added to.
  */
+/**
+ * The four highlights along the foot of the hero. BSM's wording, verbatim;
+ * nothing here is a statistic the agency has not stated. "30+ Years" is the
+ * leadership's experience in the security industry, not the agency's age —
+ * the agency was established in 2013, which is the first highlight.
+ */
+export const heroHighlights = [
+  { value: "2013", note: "Year of Agency Establishment" },
+  { value: "30+ Years", note: "Security Industry Leadership Experience" },
+  {
+    value: "Military-Guided Training",
+    note: "Discipline, Professional Conduct & Operational Preparedness",
+  },
+  {
+    value: "PSU Experience",
+    note: "Operational Experience Across Major Public Sector Undertakings",
+  },
+];
+
 export const services: Service[] = [
   {
     slug: "public-sector-government-defence-security",

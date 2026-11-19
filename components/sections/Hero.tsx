@@ -1,30 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import {
-  ArrowDown,
-  Building2,
-  CalendarCheck,
-  Cctv,
-  Phone,
-  ShieldCheck,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowDown, Phone } from "lucide-react";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
-import { site, type ServiceSlug } from "@/lib/site";
+import { heroHighlights, site } from "@/lib/site";
 import { media } from "@/lib/media";
-import { serviceShortLabels } from "@/lib/navigation";
 import { Button } from "@/components/ui/Button";
 import { RequestSecurityButton } from "@/components/ui/RequestSecurityButton";
-import { TransitionLink } from "@/components/layout/PageTransition";
-
-/** Four of BSM's own service categories, shown along the foot of the hero. */
-const highlights: { slug: ServiceSlug; icon: LucideIcon }[] = [
-  { slug: "security-guard-services", icon: ShieldCheck },
-  { slug: "access-control-surveillance", icon: Cctv },
-  { slug: "industrial-corporate-security", icon: Building2 },
-  { slug: "wedding-event-specialised-security", icon: CalendarCheck },
-];
 
 /**
  * Full-height hero. The photograph (media.heroBackdrop) fills the left of the
@@ -246,28 +228,27 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ---- Service row ------------------------------------------------- */}
+        {/* ---- Highlights -------------------------------------------------
+            Four facts, not links: a hairline between them and nothing behind,
+            so they read as a line of type rather than a row of cards. Two
+            columns on a phone, four from the small breakpoint up. The two
+            long headings wrap to a second line, which is why every cell is
+            aligned to its top and the row is not given a fixed height. */}
         <div className="pb-8 lg:grid lg:grid-cols-12 lg:pb-[clamp(1.25rem,3.5svh,2.5rem)]">
-          <ul className="grid grid-cols-2 overflow-hidden rounded-xl border border-white/[0.07] bg-void/45 backdrop-blur-md sm:grid-cols-4 lg:col-span-7 lg:col-start-6 xl:col-span-6 xl:col-start-7">
-            {highlights.map(({ slug, icon: Icon }, i) => (
+          <ul className="grid grid-cols-2 gap-y-5 sm:grid-cols-4 sm:gap-y-0 lg:col-span-7 lg:col-start-6">
+            {heroHighlights.map((item, i) => (
               <li
-                key={slug}
-                className={`hero-chip border-white/[0.07] ${i % 2 === 1 ? "border-l" : ""} ${
-                  i > 1 ? "border-t sm:border-t-0" : ""
-                } ${i === 2 ? "sm:border-l" : ""}`}
+                key={item.value}
+                className={`hero-chip px-4 sm:px-2.5 lg:px-3 ${
+                  i % 2 === 1 ? "border-l border-white/[0.09]" : ""
+                } ${i === 2 ? "sm:border-l sm:border-white/[0.09]" : ""}`}
               >
-                <TransitionLink
-                  href={`/services#${slug}`}
-                  className="group flex h-full flex-col items-center gap-2 px-3 py-[clamp(0.8rem,2svh,1.25rem)] text-center transition-colors duration-300 hover:bg-white/[0.04]"
-                >
-                  <Icon
-                    className="h-[1.6rem] w-[1.6rem] text-brass transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-1 group-hover:scale-110"
-                    strokeWidth={1.4}
-                  />
-                  <span className="text-[13.5px] font-medium leading-snug text-bone transition-colors group-hover:text-brass-lit">
-                    {serviceShortLabels[slug]}
-                  </span>
-                </TransitionLink>
+                <p className="font-display text-[clamp(0.86rem,0.66rem+0.32vw,1rem)] min-h-[2.4em] font-semibold uppercase leading-[1.2] tracking-[0] text-brass text-balance">
+                  {item.value}
+                </p>
+                <p className="mt-1.5 text-[clamp(10.5px,9px+0.2vw,12px)] leading-snug text-mist text-balance">
+                  {item.note}
+                </p>
               </li>
             ))}
           </ul>
