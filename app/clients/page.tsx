@@ -51,7 +51,7 @@ export default function ClientsPage() {
       >
         <div
           data-reveal="up"
-          className="mt-8 max-w-4xl space-y-5 text-lead text-mist lg:mt-[clamp(1.5rem,4.5svh,3.25rem)]"
+          className="mt-8 max-w-4xl space-y-5 text-lead text-justify text-mist lg:mt-[clamp(1.5rem,4.5svh,3.25rem)]"
         >
           <p>
             BSM Security Agency&apos;s client portfolio brings together organisations from the
@@ -78,7 +78,7 @@ export default function ClientsPage() {
           Our Esteemed <span className="text-brass">Clients</span>
         </h2>
 
-        <p data-reveal="up" className="mt-10 max-w-4xl text-lead text-mist">
+        <p data-reveal="up" className="mt-10 max-w-4xl text-lead text-justify text-mist">
           Explore the organisations associated with BSM Security Agency, along with their
           respective locations and operational details across the public, government, defence,
           aviation and industrial sectors.
@@ -169,7 +169,7 @@ export default function ClientsPage() {
           <span className="icon-tile !h-10 !w-10 !rounded-xl">
             <Info className="h-4 w-4" strokeWidth={1.5} />
           </span>
-          <p className="text-sm leading-relaxed text-mist">
+          <p className="text-sm leading-relaxed text-justify text-mist">
             The organisations named above are BSM&apos;s esteemed clients in the public sector. The
             list is a selection rather than a complete record: BSM serves further Public Sector
             Undertakings, and a number of private sector clients, which are not named on this page.
