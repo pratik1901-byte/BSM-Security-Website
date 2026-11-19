@@ -419,7 +419,7 @@ function OfficeBlock({ office, tinted }: { office: Office; tinted: boolean }) {
             <article
               key={person.name}
               data-stagger-item
-              className={`card card-still ${surface} flex min-w-0 flex-col p-6 ${person.advisory ? "card-feature" : ""}`}
+              className={`card card-still ${surface} flex min-w-0 flex-col p-7 ${person.advisory ? "card-feature" : ""}`}
             >
               <div className="flex items-start gap-4">
                 {portrait?.src ? (
@@ -428,11 +428,11 @@ function OfficeBlock({ office, tinted }: { office: Office; tinted: boolean }) {
                     alt={portrait.alt}
                     loading="lazy"
                     decoding="async"
-                    className="h-14 w-14 shrink-0 rounded-2xl border border-brass/25 object-cover"
+                    className="h-[4.25rem] w-[4.25rem] shrink-0 rounded-2xl border border-brass/25 object-cover"
                     style={{ objectPosition: portrait.focus ?? "50% 25%" }}
                   />
                 ) : (
-                  <span className="icon-tile">
+                  <span className="icon-tile !h-[4.25rem] !w-[4.25rem] !rounded-2xl">
                     {person.advisory ? (
                       <Scale className="h-5 w-5" strokeWidth={1.25} />
                     ) : (

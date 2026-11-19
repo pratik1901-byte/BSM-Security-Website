@@ -232,39 +232,6 @@ export const services: Service[] = [
   },
 ];
 
-export const processSteps = [
-  {
-    index: "01",
-    title: "Consultation",
-    body: "We start with a conversation about the site, the risk you are actually worried about, and what the day looks like when everything runs well.",
-  },
-  {
-    index: "02",
-    title: "Site Survey",
-    body: "A physical walk-through of entry points, blind spots, lighting, movement patterns and the hours that matter most.",
-  },
-  {
-    index: "03",
-    title: "Deployment Plan",
-    body: "A written plan: post locations, shift pattern, patrol routes, reporting formats and the escalation chain — agreed before anyone is deployed.",
-  },
-  {
-    index: "04",
-    title: "Personnel Selection",
-    body: "Personnel matched to the environment and briefed on the site specifically. [VERIFICATION AND TRAINING PROCESS]",
-  },
-  {
-    index: "05",
-    title: "Supervision",
-    body: "Field supervision, surprise checks and shift discipline — because a deployment is only as good as the night nobody is watching.",
-  },
-  {
-    index: "06",
-    title: "Review & Reporting",
-    body: "Regular reporting back to you, with review points to adjust the deployment as the site, season or risk profile changes.",
-  },
-];
-
 export const values = [
   {
     index: "01",

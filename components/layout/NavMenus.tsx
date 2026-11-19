@@ -9,7 +9,6 @@ import {
   Images,
   Landmark,
   LayoutGrid,
-  ListChecks,
   Mail,
   MapPin,
   Phone,
@@ -143,7 +142,6 @@ function LinkCard({
 function ServicesMenu({ onNavigate }: MenuProps) {
   const links = [
     { href: "/services#overview", label: "All service categories", note: `${services.length} categories, one page`, icon: LayoutGrid },
-    { href: "/#process", label: "How we work", note: "Six steps, every deployment", icon: ListChecks },
     { href: "/contact#enquiry", label: "Enquire about a service", note: "We call you back", icon: FileText },
   ];
   /* A collage of the supplied category photographs. */

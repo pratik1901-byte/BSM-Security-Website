@@ -6,7 +6,6 @@ import Statement from "@/components/sections/Statement";
 import CoreStrengths from "@/components/sections/CoreStrengths";
 import VisionMission from "@/components/sections/VisionMission";
 import ServicesOverview from "@/components/sections/ServicesOverview";
-import Process from "@/components/sections/Process";
 import CallToAction from "@/components/sections/CallToAction";
 import RevealEngine from "@/components/layout/RevealEngine";
 import { JsonLd, websiteSchema } from "@/lib/schema";
@@ -37,7 +36,6 @@ export default function HomePage() {
       <CoreStrengths />
       <VisionMission />
       <ServicesOverview />
-      <Process />
       <CallToAction />
       <RevealEngine />
     </>
