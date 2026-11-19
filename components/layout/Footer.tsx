@@ -93,15 +93,23 @@ export default function Footer() {
             <ul className="mt-6 space-y-3 text-sm">
               <li className="card card-void card-still flex gap-3 rounded-2xl p-4">
                 <Phone className="mt-0.5 h-4 w-4 shrink-0 text-brass" strokeWidth={1.5} />
-                <span className="flex flex-col gap-1.5">
-                  {site.contact.phones.map((line) => (
-                    <a
-                      key={line.href}
-                      href={line.href}
-                      className="text-mist transition-colors duration-300 hover:text-bone"
-                    >
-                      {line.display}
-                    </a>
+                {/* Grouped by office, like the addresses below. */}
+                <span className="flex min-w-0 flex-col gap-3">
+                  {offices.map((office) => (
+                    <span key={office.id} className="flex min-w-0 flex-col gap-1">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-brass">
+                        {office.kind}
+                      </span>
+                      {office.phones.map((line) => (
+                        <a
+                          key={line.href}
+                          href={line.href}
+                          className="text-mist transition-colors duration-300 hover:text-bone"
+                        >
+                          {line.display}
+                        </a>
+                      ))}
+                    </span>
                   ))}
                 </span>
               </li>
