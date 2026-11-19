@@ -1,8 +1,17 @@
 import { Mail, Phone } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
-import { site } from "@/lib/site";
+import { site, offices } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
 import { RequestSecurityButton } from "@/components/ui/RequestSecurityButton";
+
+/** Email addresses by office, in the order the footer lists them. */
+const emailsByOffice = [
+  {
+    label: offices[0].kind,
+    lines: [offices[0].email, { display: site.contact.email, href: site.contact.emailHref }],
+  },
+  { label: offices[1].kind, lines: [offices[1].email] },
+];
 
 /**
  * Closing call to action: one large rounded panel that grows into place as it
@@ -85,15 +94,23 @@ export default function CallToAction({
               <Phone className="h-5 w-5" strokeWidth={1.4} />
             </span>
             <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-dim">Call</p>
-            <ul className="mt-3 space-y-2">
-              {site.contact.phones.map((line) => (
-                <li key={line.href}>
-                  <a
-                    href={line.href}
-                    className="link-wipe font-display text-lg font-semibold tracking-[-0.01em] text-bone transition-colors duration-300 hover:text-brass"
-                  >
-                    {line.display}
-                  </a>
+            <ul className="mt-3 space-y-3">
+              {offices.map((office) => (
+                <li key={office.id}>
+                  <span className="block font-mono text-[9px] uppercase tracking-[0.18em] text-brass">
+                    {office.kind}
+                  </span>
+                  <span className="mt-1 flex flex-col items-start gap-1">
+                    {office.phones.map((line) => (
+                      <a
+                        key={line.href}
+                        href={line.href}
+                        className="link-wipe font-display text-lg font-semibold tracking-[-0.01em] text-bone transition-colors duration-300 hover:text-brass"
+                      >
+                        {line.display}
+                      </a>
+                    ))}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -125,19 +142,32 @@ export default function CallToAction({
             </ul>
           </div>
 
-          <a
-            href={site.contact.emailHref}
-            data-stagger-item
-            className="card card-ink group block p-7 md:p-8"
-          >
+          <div data-stagger-item className="card card-ink group block p-7 md:p-8">
             <span className="icon-tile">
               <Mail className="h-5 w-5" strokeWidth={1.4} />
             </span>
             <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-dim">Email</p>
-            <p className="mt-3 break-all font-display text-lg font-semibold tracking-[-0.01em] text-bone transition-colors duration-300 group-hover:text-brass">
-              {site.contact.email}
-            </p>
-          </a>
+            <ul className="mt-3 space-y-3">
+              {emailsByOffice.map((group) => (
+                <li key={group.label}>
+                  <span className="block font-mono text-[9px] uppercase tracking-[0.18em] text-brass">
+                    {group.label}
+                  </span>
+                  <span className="mt-1 flex flex-col items-start gap-1">
+                    {group.lines.map((line) => (
+                      <a
+                        key={line.href}
+                        href={line.href}
+                        className="link-wipe break-all font-display text-[1.0625rem] font-semibold tracking-[-0.01em] text-bone transition-colors duration-300 hover:text-brass"
+                      >
+                        {line.display}
+                      </a>
+                    ))}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
