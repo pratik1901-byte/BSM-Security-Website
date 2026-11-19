@@ -496,10 +496,21 @@ export const offices: Office[] = [
         id: "dattatray-b-naik",
         name: "Mr. Dattatray B Naik",
         role: "Principal Partner",
+        responsibilities: "Security operations, organisational management and service delivery.",
         phone: { display: "+91 94212 49677", href: "tel:+919421249677" },
       },
-      { id: "bhupinder-singh-malhi", name: "Lt. Col. Bhupinder S Malhi (retd.)", role: "Partner" },
-      { id: "bhagyashree-dattatray-naik", name: "Mrs. Bhagyashree Dattatray Naik", role: "Partner" },
+      {
+        id: "bhupinder-singh-malhi",
+        name: "Lt. Col. Bhupinder S Malhi (retd.)",
+        role: "Partner",
+        responsibilities: "Military discipline, training standards and professional conduct.",
+      },
+      {
+        id: "bhagyashree-dattatray-naik",
+        name: "Mrs. Bhagyashree Dattatray Naik",
+        role: "Partner",
+        responsibilities: "Administration, accounts and organisational coordination.",
+      },
       {
         id: "nihal-d-naik",
         name: "Adv Nihal D Naik",

@@ -407,12 +407,10 @@ function OfficeBlock({ office, tinted }: { office: Office; tinted: boolean }) {
           <h3 className="eyebrow">{office.leadershipLabel}</h3>
         </div>
 
-        <div
-          className={`mt-6 grid gap-4 sm:grid-cols-2 ${
-            office.leadership.length > 2 ? "xl:grid-cols-4" : ""
-          }`}
-          data-stagger
-        >
+        {/* Two across at every width above a phone. Four across left only
+            108px of card between the portrait and the edge, which wrapped a
+            name like Mrs. Bhagyashree Dattatray Naik over four lines. */}
+        <div className="mt-6 grid gap-4 sm:grid-cols-2" data-stagger>
           {office.leadership.map((person) => {
             const portrait = person.id ? portraits[person.id] : undefined;
             return (
@@ -428,11 +426,11 @@ function OfficeBlock({ office, tinted }: { office: Office; tinted: boolean }) {
                     alt={portrait.alt}
                     loading="lazy"
                     decoding="async"
-                    className="h-[4.25rem] w-[4.25rem] shrink-0 rounded-2xl border border-brass/25 object-cover"
+                    className="h-[5rem] w-[5rem] shrink-0 rounded-2xl border border-brass/25 object-cover"
                     style={{ objectPosition: portrait.focus ?? "50% 25%" }}
                   />
                 ) : (
-                  <span className="icon-tile !h-[4.25rem] !w-[4.25rem] !rounded-2xl">
+                  <span className="icon-tile !h-[5rem] !w-[5rem] !rounded-2xl">
                     {person.advisory ? (
                       <Scale className="h-5 w-5" strokeWidth={1.25} />
                     ) : (
@@ -452,14 +450,13 @@ function OfficeBlock({ office, tinted }: { office: Office; tinted: boolean }) {
                     {person.role}
                     {person.advisory && <span className="block text-dim">To the Head Office</span>}
                   </p>
+                  {person.responsibilities && (
+                    <p className="mt-2 text-[12.5px] leading-relaxed text-dim">
+                      {person.responsibilities}
+                    </p>
+                  )}
                 </div>
               </div>
-
-              {person.responsibilities && (
-                <p className="mt-5 border-t border-white/[0.06] pt-4 text-sm leading-relaxed text-mist">
-                  {person.responsibilities}
-                </p>
-              )}
 
               {person.phone && (
                 <a
