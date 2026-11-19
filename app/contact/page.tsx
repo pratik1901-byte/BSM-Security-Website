@@ -31,11 +31,27 @@ const officeIcons = {
   "branch-office-goa": MapPin,
 } as const;
 
-/** The same marks, keyed by the label used on the WhatsApp lines. */
-const whatsappIcons = {
+/** The same marks, keyed by the label the WhatsApp and email lines carry. */
+const officeLabelIcons = {
   "Head Office": Building2,
   "Branch Office": MapPin,
 } as const;
+
+/**
+ * Email addresses by office. The Head Office answers two — its own and the
+ * general enquiry address — so this cannot be read straight off offices[].
+ * The order matches the footer.
+ */
+const emailsByOffice = [
+  {
+    label: offices[0].kind,
+    lines: [
+      offices[0].email,
+      { display: site.contact.email, href: site.contact.emailHref },
+    ],
+  },
+  { label: offices[1].kind, lines: [offices[1].email] },
+];
 
 export default function ContactPage() {
   return (
@@ -70,17 +86,33 @@ export default function ContactPage() {
               <Phone className="h-5 w-5" strokeWidth={1.4} />
             </span>
             <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-dim">Call</p>
-            <ul className="mt-3 space-y-2">
-              {site.contact.phones.map((line) => (
-                <li key={line.href}>
-                  <a
-                    href={line.href}
-                    className="link-wipe font-display text-lg font-semibold tracking-[-0.01em] text-bone transition-colors duration-300 hover:text-brass"
-                  >
-                    {line.display}
-                  </a>
-                </li>
-              ))}
+            {/* Grouped by office, so a caller knows which desk answers. */}
+            <ul className="mt-4 space-y-4">
+              {offices.map((office) => {
+                const Icon = officeIcons[office.id as keyof typeof officeIcons];
+                return (
+                  <li key={office.id}>
+                    <div className="flex items-center gap-2">
+                      {Icon && <Icon className="h-4 w-4 shrink-0 text-brass" strokeWidth={1.5} />}
+                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brass">
+                        {office.kind}
+                      </p>
+                    </div>
+                    <ul className="mt-2 space-y-1.5">
+                      {office.phones.map((line) => (
+                        <li key={line.href}>
+                          <a
+                            href={line.href}
+                            className="link-wipe font-display text-lg font-semibold tracking-[-0.01em] text-bone transition-colors duration-300 hover:text-brass"
+                          >
+                            {line.display}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                );
+              })}
             </ul>
             <p className="mt-4 text-sm text-mist">For enquiries and survey bookings.</p>
           </div>
@@ -95,7 +127,7 @@ export default function ContactPage() {
             {/* One line per office, each labelled. */}
             <ul className="mt-4 space-y-4">
               {site.contact.whatsappByOffice.map((line) => {
-                const Icon = whatsappIcons[line.label as keyof typeof whatsappIcons];
+                const Icon = officeLabelIcons[line.label as keyof typeof officeLabelIcons];
                 return (
                   <li key={line.href}>
                     <div className="flex items-center gap-2">
@@ -121,8 +153,7 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <a
-            href={site.contact.emailHref}
+          <div
             data-stagger-item
             data-tilt="5"
             className="card card-void group block p-7 lg:p-[clamp(1.25rem,2.8svh,2rem)]"
@@ -131,15 +162,43 @@ export default function ContactPage() {
               <Mail className="h-5 w-5" strokeWidth={1.4} />
             </span>
             <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-dim">Email</p>
-            <p className="mt-3 break-all font-display text-lg font-semibold tracking-[-0.01em] text-bone transition-colors duration-300 group-hover:text-brass">
-              {site.contact.email}
-            </p>
+            {/* Grouped like the call lines: the Head Office answers two. */}
+            <ul className="mt-4 space-y-4">
+              {emailsByOffice.map((group) => {
+const Icon = officeLabelIcons[group.label as keyof typeof officeLabelIcons];
+                return (
+                  <li key={group.label}>
+                    <div className="flex items-center gap-2">
+                      {Icon && <Icon className="h-4 w-4 shrink-0 text-brass" strokeWidth={1.5} />}
+                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brass">
+                        {group.label}
+                      </p>
+                    </div>
+                    <ul className="mt-2 space-y-1.5">
+                      {group.lines.map((line) => (
+                        <li key={line.href}>
+                          <a
+                            href={line.href}
+                            className="link-wipe break-all font-display text-[1.0625rem] font-semibold tracking-[-0.01em] text-bone transition-colors duration-300 hover:text-brass"
+                          >
+                            {line.display}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                );
+              })}
+            </ul>
             <p className="mt-4 text-sm text-mist">For written scopes, tenders and documentation.</p>
-            <span className="mt-6 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-brass">
+            <a
+              href={site.contact.emailHref}
+              className="mt-6 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-brass transition-colors duration-300 hover:text-brass-lit"
+            >
               Write to us
               <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={1.75} />
-            </span>
-          </a>
+            </a>
+          </div>
         </div>
       </PageHero>
 
