@@ -11,8 +11,8 @@ export const dynamic = "force-static";
 export default function Image() {
   return ogCard({
     eyebrow: "Security Agency · Goa, India",
-    title: "Protecting industries. Securing Businesses. Building Trust.",
-    lead: "Trained security personnel and managed protection across India.",
-    foot: "PSU · Industrial · Banking · Events",
+    title: "Protecting industries. Securing businesses. Building trust.",
+    lead: "Trained security personnel and managed protection — corporate, industrial, residential, hospitality and events.",
+    foot: "Site survey · Written plan · Verified supervision",
   });
 }

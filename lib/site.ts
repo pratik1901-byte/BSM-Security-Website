@@ -13,7 +13,21 @@ export const site = {
   tagline: "Protecting industries. Securing Businesses. Building Trust.",
   description:
     "BSM is a professional security agency based in Goa, India, providing trained security personnel and managed protection services for corporate, residential, industrial, hospitality and event environments.",
-  url: "https://bsmsecurityagency.com",
+  /**
+   * The address the site is served from, and what every absolute URL is
+   * built on: the canonical link, the sitemap, the structured data and the
+   * share cards.
+   *
+   * It has to be an address that answers. bsmsecurityagency.com is
+   * registered but not yet pointed at this deployment — it returns an empty
+   * JSON placeholder, and /og-image/home.png on it is a 404 — so while it
+   * stood here WhatsApp and every other scraper fetched a dead URL and
+   * showed no preview at all.
+   *
+   * Change this one line the day the domain is connected in Vercel, and the
+   * canonical, the sitemap and the cards all follow.
+   */
+  url: "https://bsm-security-website.vercel.app",
   locale: "en_IN",
   region: "Goa, India",
 

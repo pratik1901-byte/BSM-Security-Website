@@ -34,14 +34,30 @@ export const baseKeywords = [
 ];
 
 /**
- * Each route draws its own share card from app/<route>/opengraph-image.tsx,
- * so a link to Services does not arrive looking like a link to the home
- * page. It has to be named here: a page that defines its own openGraph
- * replaces the one Next.js would have attached, card included.
+ * Each route has its own share card, so a link to Services does not arrive
+ * looking like a link to the home page. It has to be named here: a page
+ * that defines its own openGraph replaces the one Next.js would attach,
+ * card included.
+ *
+ * The URL points at the exported PNG rather than at the generating route.
+ * The route emits a file with no extension, which a host serves as
+ * application/octet-stream — and WhatsApp, which wants an image type and an
+ * image extension, declines to show it. /og-image/<page>.png is the same
+ * picture with both.
  */
+const CARDS: Record<string, string> = {
+  "/": "home",
+  "/about": "about",
+  "/services": "services",
+  "/clients": "clients",
+  "/branch": "branch",
+  "/gallery": "gallery",
+  "/contact": "contact",
+};
+
 function shareImage(path: string, alt: string) {
-  const base = path === "/" ? "" : path.replace(/\/$/, "");
-  return { url: `${base}/opengraph-image`, width: 1200, height: 630, type: "image/png", alt };
+  const name = CARDS[path.replace(/\/$/, "") || "/"] ?? "home";
+  return { url: `/og-image/${name}.png`, width: 1200, height: 630, type: "image/png", alt };
 }
 
 export function pageMetadata({
