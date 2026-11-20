@@ -34,16 +34,15 @@ export const baseKeywords = [
 ];
 
 /**
- * The generated share card (app/opengraph-image.tsx). Set explicitly because a
- * page that defines its own openGraph replaces the one Next.js would attach.
+ * Each route draws its own share card from app/<route>/opengraph-image.tsx,
+ * so a link to Services does not arrive looking like a link to the home
+ * page. It has to be named here: a page that defines its own openGraph
+ * replaces the one Next.js would have attached, card included.
  */
-const shareImage = {
-  url: "/opengraph-image",
-  width: 1200,
-  height: 630,
-  type: "image/png",
-  alt: "BSM Security Agency, Goa — Protecting industries. Securing Businesses. Building Trust.",
-};
+function shareImage(path: string, alt: string) {
+  const base = path === "/" ? "" : path.replace(/\/$/, "");
+  return { url: `${base}/opengraph-image`, width: 1200, height: 630, type: "image/png", alt };
+}
 
 export function pageMetadata({
   path,
@@ -62,6 +61,7 @@ export function pageMetadata({
 }): Metadata {
   const fullTitle = absoluteTitle ? title : `${title} | ${brand.suffix}`;
   const url = `${site.url}${path === "/" ? "" : path}`;
+  const card = shareImage(path, `${fullTitle} — BSM Security Agency, Goa`);
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description,
@@ -74,13 +74,13 @@ export function pageMetadata({
       siteName: brand.name,
       title: fullTitle,
       description,
-      images: [shareImage],
+      images: [card],
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
-      images: [shareImage.url],
+      images: [card.url],
     },
   };
 }
