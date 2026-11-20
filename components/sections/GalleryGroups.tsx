@@ -52,7 +52,14 @@ export default function GalleryGroups() {
               </p>
             </div>
 
-            <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
+            {/* Columns, not a grid: a grid row is as tall as its tallest
+                tile and leaves the rest short, which is why every picture
+                used to be cropped to one shape. Columns let each keep its
+                own height, so nothing is cut. */}
+            <div
+              className="mt-14 columns-1 gap-5 sm:columns-2 lg:columns-3 [&>*]:mb-5 [&>*]:break-inside-avoid"
+              data-stagger
+            >
               {items.map((item, i) => (
                 <GalleryTile
                   key={`${group}-${i}`}
@@ -80,18 +87,14 @@ function GalleryTile({ item, onOpen }: { item: GalleryItem; onOpen: () => void }
       label={item.label}
       note={item.brief}
       figure={item.figure}
-      ratio={item.wide ? "16 / 10" : "4 / 5"}
+      ratio={item.ratio ?? "4 / 5"}
       parallax={0}
-      sizes={
-        item.wide
-          ? "(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 66vw"
-          : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-      }
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
     />
   );
 
   return (
-    <div data-stagger-item className={`relative ${item.wide ? "sm:col-span-2" : ""}`}>
+    <div data-stagger-item className="relative">
       {canOpen ? (
         <button
           type="button"

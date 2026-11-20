@@ -29,6 +29,10 @@ export type GalleryItem = {
   /** Used when there is no shot yet. */
   label?: string;
   brief?: string;
-  /** Frames marked wide span two columns on large screens. */
-  wide?: boolean;
+  /**
+   * The photograph's own width / height. The gallery frames each picture at
+   * its true proportions rather than cropping it to a common shape, so this
+   * is set for every entry that has a shot.
+   */
+  ratio?: string;
 };
