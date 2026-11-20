@@ -125,6 +125,16 @@ export default function RootLayout({
           }}
         />
         {/*
+          Whether the entrance runs is settled here, before the body is
+          painted, rather than in an effect after hydration. Deciding it
+          later meant the page showed through for the few frames before the
+          cover appeared. The screen itself is in the HTML already and rests
+          at display:none; this only marks the document when it should run,
+          which is the first view of a session for a visitor who has not
+          asked for reduced motion.
+        */}
+        <script dangerouslySetInnerHTML={{ __html: "try{if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&sessionStorage.getItem('bsm-intro')!=='seen'){sessionStorage.setItem('bsm-intro','seen');document.documentElement.setAttribute('data-intro','on')}}catch(e){}" }} />
+        {/*
           Stale build guard.
 
           Every build names its CSS and JS chunks after a fresh hash, and a

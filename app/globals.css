@@ -896,3 +896,40 @@ figure img {
     cursor: url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='28'%20height='28'%20viewBox='0%200%2028%2028'><path%20d='M6%203.2%206%2022.4%2011.1%2017.4%2014.3%2023.8%2017.8%2022.1%2014.6%2015.8%2021.2%2015.4Z'%20fill='%23c8a45c'%20stroke='%2304060a'%20stroke-width='1.6'%20stroke-linejoin='round'/></svg>") 6 3, not-allowed;
   }
 }
+
+/* --------------------------------------------------------------------------
+   The entrance
+
+   Hidden unless the script in the document head has marked the document,
+   which it does before the body is painted. So on a repeat view the screen
+   never appears — not for a frame — and on a first view it is already
+   covering the page when the first pixels land, instead of arriving after
+   hydration and letting the site flash behind it.
+
+   The failsafe matters: if the JavaScript that lifts this never runs, a
+   visitor would be left staring at a cover. After six seconds it fades on
+   its own. Scrolling is locked by that script and not here, so a page whose
+   script never ran is still readable underneath.
+   -------------------------------------------------------------------------- */
+.intro-screen {
+  display: none;
+}
+
+html[data-intro="on"] .intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 125;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--color-void);
+  animation: intro-failsafe 0.5s ease 6s forwards;
+}
+
+@keyframes intro-failsafe {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
