@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     description: site.description,
     images: [
       {
-        url: "/og-image/home.png",
+        url: `${site.url}/og-image/home.png`,
         secureUrl: `${site.url}/og-image/home.png`,
         width: 1200,
         height: 630,
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${brand.name} — Security Agency in Goa`,
     description: site.description,
-    images: ["/og-image/home.png"],
+    images: [`${site.url}/og-image/home.png`],
   },
   robots: {
     index: true,

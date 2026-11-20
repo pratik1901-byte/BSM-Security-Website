@@ -57,10 +57,10 @@ const CARDS: Record<string, string> = {
 
 function shareImage(path: string, alt: string) {
   const name = CARDS[path.replace(/\/$/, "") || "/"] ?? "home";
-  const relativeUrl = `/og-image/${name}.png`;
+  const absUrl = `${site.url}/og-image/${name}.png`;
   return {
-    url: relativeUrl,
-    secureUrl: `${site.url}${relativeUrl}`,
+    url: absUrl,
+    secureUrl: absUrl,
     width: 1200,
     height: 630,
     type: "image/png",
