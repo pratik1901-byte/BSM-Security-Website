@@ -11,6 +11,7 @@ import ScrollProgress from "@/components/layout/ScrollProgress";
 import BackToTop from "@/components/layout/BackToTop";
 import Intro from "@/components/layout/Intro";
 import ContentGuard from "@/components/layout/ContentGuard";
+import ContextMenu from "@/components/layout/ContextMenu";
 import PointerFX from "@/components/layout/PointerFX";
 import { TransitionProvider } from "@/components/layout/PageTransition";
 import { EnquiryProvider } from "@/components/layout/EnquiryModal";
@@ -149,6 +150,7 @@ export default function RootLayout({
           <EnquiryProvider>
             <SmoothScroll />
             <ContentGuard />
+            <ContextMenu />
             <PointerFX />
             <ScrollProgress />
             <Intro />
