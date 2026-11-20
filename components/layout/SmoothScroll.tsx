@@ -153,7 +153,28 @@ export default function SmoothScroll() {
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
+    /* Turning an iPad changes every section's height and therefore every
+       scroll trigger's start and end. ScrollTrigger re-measures on resize by
+       itself, but iOS fires orientationchange before the new viewport has
+       settled, so the measurement it takes can be of the old one. Measuring
+       again once it has settled — and telling Lenis its own size has changed
+       — is what keeps the reveals and the shortcut bar on the right sections
+       after a turn. */
+    let settle = 0;
+    const remeasure = () => {
+      window.clearTimeout(settle);
+      settle = window.setTimeout(() => {
+        lenis.resize();
+        ScrollTrigger.refresh();
+      }, 250);
+    };
+    window.addEventListener('orientationchange', remeasure);
+    window.matchMedia('(orientation: portrait)').addEventListener('change', remeasure);
+
     return () => {
+      window.clearTimeout(settle);
+      window.removeEventListener('orientationchange', remeasure);
+      window.matchMedia('(orientation: portrait)').removeEventListener('change', remeasure);
       lenis.off("scroll", onScroll);
       gsap.ticker.remove(tick);
       gsap.ticker.lagSmoothing(500, 33);
