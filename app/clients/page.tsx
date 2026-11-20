@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
-import { Info, MapPin } from "lucide-react";
+import { Info } from "lucide-react";
 import { clients } from "@/lib/site";
 import { clientLogos } from "@/lib/media";
 import { shortcuts } from "@/lib/navigation";
@@ -146,12 +146,16 @@ export default function ClientsPage() {
                   )}
 
                   <ul className="mt-4 space-y-2 rounded-[0.9rem] border border-brass/20 bg-brass/[0.05] p-3.5">
-                    {client.details.map((detail) => (
+                    {client.details.map((detail, i) => (
                       <li
                         key={detail}
                         className="flex items-start gap-2.5 text-[13px] leading-relaxed text-bone"
                       >
-                        <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brass" strokeWidth={2} />
+                        {/* The site numbers its lists rather than bulleting them;
+                            these follow suit, in the same brass. */}
+                        <span className="mt-[0.15rem] shrink-0 font-mono text-[10px] font-semibold tabular-nums tracking-[0.12em] text-brass">
+                          {i + 1}
+                        </span>
                         <span>{detail}</span>
                       </li>
                     ))}
