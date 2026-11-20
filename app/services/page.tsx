@@ -103,7 +103,6 @@ export default function ServicesPage() {
       {services.map((service, i) => {
         const shot = serviceShots[service.slug];
         const flipped = i % 2 === 1;
-        const next = services[i + 1];
         return (
           <Section
             key={service.slug}
@@ -165,15 +164,6 @@ export default function ServicesPage() {
                   <Button href={`/contact?service=${service.slug}#enquiry`} variant="outline">
                     Enquire about this service
                   </Button>
-                  {next && (
-                    <TransitionLink
-                      href={`/services#${next.slug}`}
-                      className="group inline-flex items-center gap-2 rounded-full px-4 py-3 font-mono text-[10px] uppercase tracking-[0.18em] text-dim transition-colors hover:text-brass"
-                    >
-                      Next: {serviceShortLabels[next.slug]}
-                      <ArrowDown className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-y-0.5" strokeWidth={1.75} />
-                    </TransitionLink>
-                  )}
                 </div>
               </div>
 
