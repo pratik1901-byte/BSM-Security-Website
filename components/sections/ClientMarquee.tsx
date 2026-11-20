@@ -4,7 +4,8 @@ import { clientLogos } from "@/lib/media";
 import { TransitionLink } from "@/components/layout/PageTransition";
 
 /**
- * Our Esteemed Clients — a continuous strip of logos, straight from the roster
+ * Our Esteemed DGR Sponsored Public Sector Clients — a continuous strip of logos,
+ * straight from the roster
  * in lib/site and the logo dictionary in lib/media.
  *
  * Every logo sits centred on an identical white plate (the marks are drawn
@@ -74,7 +75,10 @@ export default function ClientMarquee() {
           data-reveal="up"
         >
           <span className="h-1.5 w-1.5 rounded-full bg-brass" aria-hidden="true" />
-          <span className="eyebrow">Our Esteemed Clients</span>
+          <span className="eyebrow">
+            Our Esteemed <span className="font-semibold text-brass-lit">DGR Sponsored</span> Public
+            Sector <span className="font-semibold text-brass-lit">Clients</span>
+          </span>
         </div>
         <h2 data-split className="mt-6 max-w-3xl text-title font-semibold text-bone">
           Organisations BSM is engaged with.

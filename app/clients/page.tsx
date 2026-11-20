@@ -69,13 +69,14 @@ export default function ClientsPage() {
       <SubNav items={shortcuts.clients} label="Client page shortcuts" />
 
       {/* Client roster */}
-      <Section id="roster" label="Our esteemed clients">
+      <Section id="roster" label="Our esteemed DGR sponsored public sector clients">
         <SectionLabel index="01">Our clients</SectionLabel>
         <h2
           data-split
           className="mt-8 text-display font-semibold uppercase tracking-[-0.01em] text-bone"
         >
-          Our Esteemed <span className="text-brass">Clients</span>
+          Our Esteemed <span className="text-brass">DGR Sponsored</span> Public Sector{" "}
+          <span className="text-brass">Clients</span>
         </h2>
 
         <p data-reveal="up" className="mt-10 max-w-4xl text-lead text-justify text-mist">
