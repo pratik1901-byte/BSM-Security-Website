@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 
@@ -87,6 +88,53 @@ export function jumpToTop() {
  * share a single rAF loop. Disabled outright under reduced-motion.
  */
 export default function SmoothScroll() {
+  const pathname = usePathname();
+
+  /**
+   * Every page opens at its top.
+   *
+   * Two things put a visitor back where they left off. The browser restores
+   * the old offset itself on a history move, and Safari — on an iPad or a
+   * Mac — does so after the new page has painted, so resetting once is not
+   * enough. And the reset this site had ran only when the page-transition
+   * curtain had covered the screen, which leaves every other route change —
+   * back, forward, a restore from the back/forward cache — untouched.
+   *
+   * So: tell the browser not to restore (scrollRestoration), reset on every
+   * change of path rather than only the curtained ones, and reset again on
+   * the next frame and shortly after, which is what beats Safari putting the
+   * old offset back. A link carrying a hash is left alone — PageTransition
+   * lands those on their anchor.
+   */
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
+  }, []);
+
+  useEffect(() => {
+    if (window.location.hash) return;
+
+    const toTop = () => {
+      if (!window.location.hash) jumpToTop();
+    };
+
+    toTop();
+    const frame = requestAnimationFrame(toTop);
+    const late = window.setTimeout(toTop, 150);
+
+    /* A page restored from the back/forward cache does not re-run the effect
+       above; it fires pageshow with persisted set instead. */
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) toTop();
+    };
+    window.addEventListener("pageshow", onPageShow);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.clearTimeout(late);
+      window.removeEventListener("pageshow", onPageShow);
+    };
+  }, [pathname]);
+
   useEffect(() => {
     if (prefersReducedMotion()) return;
 
