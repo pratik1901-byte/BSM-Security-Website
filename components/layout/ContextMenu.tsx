@@ -2,14 +2,25 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { ArrowUp, Expand, Link2, Phone, ShieldCheck, X } from "lucide-react";
+import { ArrowUp, Copy, Expand, Link2, Mail, Phone, ShieldCheck, X } from "lucide-react";
 import { site } from "@/lib/site";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { useEnquiry } from "./EnquiryModal";
 import { jumpToTop } from "./SmoothScroll";
 
-type Picture = { src: string; alt: string };
-type Spot = { x: number; y: number; img: Picture | null; scrolled: boolean };
+type Picture = { src: string; name: string; alt: string };
+
+/** What sat under the pointer, and so what the menu offers. */
+type Spot = {
+  x: number;
+  y: number;
+  img: Picture | null;
+  /** A telephone number or an email address, ready to copy. */
+  contact: { kind: "phone" | "email"; value: string; href: string } | null;
+  /** Text the visitor had selected. */
+  selection: string;
+  scrolled: boolean;
+};
 
 /**
  * The site's own right-click menu, and the viewer it opens.
@@ -42,13 +53,13 @@ type Spot = { x: number; y: number; img: Picture | null; scrolled: boolean };
 export default function ContextMenu() {
   const [spot, setSpot] = useState<Spot | null>(null);
   const [viewing, setViewing] = useState<Picture | null>(null);
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const { open: openEnquiry } = useEnquiry();
 
   const close = useCallback(() => {
     setSpot(null);
-    setCopied(false);
+    setCopied(null);
   }, []);
 
   useEffect(() => {
@@ -61,14 +72,57 @@ export default function ContextMenu() {
       if (inFormField(e.target)) return;
       e.preventDefault();
 
+      /*
+       * What may be enlarged: BSM's own photography. Not a client's logo,
+       * which is their artwork rather than ours, and not a portrait of a
+       * member of staff — a face is not an exhibit, and the About and
+       * Branch pages are full of them. Either can also opt out by carrying
+       * data-no-preview.
+       */
       const el = e.target instanceof Element ? e.target.closest("img") : null;
-      const img =
-        el instanceof HTMLImageElement && el.currentSrc
-          ? { src: el.currentSrc, alt: el.alt || "Photograph" }
+      const src = el instanceof HTMLImageElement ? el.currentSrc : "";
+      /* Nor the thumbnails inside the chrome: those are navigation, and a
+         viewer opening over the menu that launched it is nonsense. */
+      const inChrome = !!el?.closest("header, nav, [data-subnav], [data-site-header]");
+      const offers =
+        el instanceof HTMLImageElement &&
+        !!src &&
+        !inChrome &&
+        !el.hasAttribute("data-no-preview") &&
+        !src.includes("/media/clients/") &&
+        !src.includes("/media/people/") &&
+        !src.includes("/brand/");
+      const img = offers
+        ? {
+            src: el.currentSrc,
+            /* The photograph's own name where it has one, the alt text
+               otherwise, so the viewer is never captioned "Photograph". */
+            name: el.dataset.name || el.alt || "Photograph",
+            alt: el.alt || "",
+          }
+        : null;
+
+      /* A number or an address under the pointer is the thing most worth
+         offering, so read the link it sits in. */
+      const link = e.target instanceof Element ? e.target.closest("a[href]") : null;
+      const href = link?.getAttribute("href") ?? "";
+      const contact = href.startsWith("tel:")
+        ? { kind: "phone" as const, value: href.slice(4), href }
+        : href.startsWith("mailto:")
+          ? { kind: "email" as const, value: href.slice(7), href }
           : null;
 
-      setCopied(false);
-      setSpot({ x: e.clientX, y: e.clientY, img, scrolled: window.scrollY > 400 });
+      const selection = (window.getSelection()?.toString() ?? "").trim();
+
+      setCopied(null);
+      setSpot({
+        x: e.clientX,
+        y: e.clientY,
+        img,
+        contact,
+        selection: selection.length > 1 ? selection : "",
+        scrolled: window.scrollY > 400,
+      });
     };
 
     document.addEventListener("contextmenu", onContextMenu);
@@ -114,13 +168,13 @@ export default function ContextMenu() {
     return () => window.removeEventListener("keydown", onKey);
   }, [spot, viewing, close]);
 
-  const copyLink = useCallback(async () => {
+  const copy = useCallback(async (what: string, text: string) => {
     try {
-      await navigator.clipboard.writeText(window.location.href);
+      await navigator.clipboard.writeText(text);
     } catch {
       /* Clipboard refused — fall back to a selection the visitor can copy. */
       const field = document.createElement("textarea");
-      field.value = window.location.href;
+      field.value = text;
       field.style.cssText = "position:fixed;opacity:0";
       document.body.appendChild(field);
       field.select();
@@ -131,7 +185,7 @@ export default function ContextMenu() {
       }
       field.remove();
     }
-    setCopied(true);
+    setCopied(what);
     window.setTimeout(close, 900);
   }, [close]);
 
@@ -139,7 +193,9 @@ export default function ContextMenu() {
   const place = useMemo(() => {
     if (!spot) return { left: 0, top: 0 };
     const w = 248;
-    const h = 92 + (spot.img ? 44 : 0) + (spot.scrolled ? 44 : 0) + 4 * 44;
+    const rows =
+      4 + (spot.img ? 1 : 0) + (spot.contact ? 1 : 0) + (spot.selection ? 1 : 0) + (spot.scrolled ? 1 : 0);
+    const h = 92 + rows * 44;
     return {
       left: Math.max(8, Math.min(spot.x, window.innerWidth - w - 8)),
       top: Math.max(8, Math.min(spot.y, window.innerHeight - h - 8)),
@@ -179,9 +235,45 @@ export default function ContextMenu() {
                 }}
               >
                 <Expand className={icon} strokeWidth={1.6} />
-                View image
+                <span className="truncate">View “{spot.img.name}”</span>
               </button>
             )}
+
+            {spot.contact && (
+              <button
+                type="button"
+                role="menuitem"
+                data-menuitem
+                className={row}
+                onClick={() => copy("contact", spot.contact!.value)}
+              >
+                {spot.contact.kind === "phone" ? (
+                  <Phone className={icon} strokeWidth={1.6} />
+                ) : (
+                  <Mail className={icon} strokeWidth={1.6} />
+                )}
+                {copied === "contact"
+                  ? "Copied"
+                  : spot.contact.kind === "phone"
+                    ? `Copy ${spot.contact.value}`
+                    : "Copy email address"}
+              </button>
+            )}
+
+            {spot.selection && (
+              <button
+                type="button"
+                role="menuitem"
+                data-menuitem
+                className={row}
+                onClick={() => copy("selection", spot.selection)}
+              >
+                <Copy className={icon} strokeWidth={1.6} />
+                {copied === "selection" ? "Copied" : "Copy selected text"}
+              </button>
+            )}
+
+            <div className="my-1 h-px bg-white/[0.07]" />
 
             <button
               type="button"
@@ -223,9 +315,15 @@ export default function ContextMenu() {
 
             <div className="my-1 h-px bg-white/[0.07]" />
 
-            <button type="button" role="menuitem" data-menuitem className={row} onClick={copyLink}>
+            <button
+              type="button"
+              role="menuitem"
+              data-menuitem
+              className={row}
+              onClick={() => copy("page", window.location.href)}
+            >
               <Link2 className={icon} strokeWidth={1.6} />
-              {copied ? "Link copied" : "Copy link to this page"}
+              {copied === "page" ? "Link copied" : "Copy link to this page"}
             </button>
 
             {spot.scrolled && (
@@ -249,11 +347,11 @@ export default function ContextMenu() {
 
       {viewing &&
         createPortal(
-          <div
-            className="fixed inset-0 z-[210] flex flex-col items-center justify-center gap-4 bg-void/95 p-6 backdrop-blur-sm md:p-10"
+          <figure
+            className="fixed inset-0 z-[210] m-0 flex flex-col items-center justify-center gap-4 bg-void/95 p-6 backdrop-blur-sm md:p-10"
             role="dialog"
             aria-modal="true"
-            aria-label={viewing.alt}
+            aria-label={viewing.name}
             onClick={() => setViewing(null)}
           >
             <button
@@ -278,10 +376,21 @@ export default function ContextMenu() {
               className="max-h-[78vh] w-auto max-w-[min(1100px,90vw)] rounded-[1.25rem] border border-brass/30 object-contain shadow-[0_40px_120px_-30px_rgba(0,0,0,1)]"
             />
 
-            <p className="max-w-[min(1100px,90vw)] text-center text-[13px] leading-relaxed text-mist">
-              {viewing.alt}
-            </p>
-          </div>,
+            {/* The picture's name, then what is in it. */}
+            <figcaption className="flex max-w-[min(1100px,90vw)] flex-col items-center gap-1.5 text-center">
+              <span className="font-display text-[17px] font-semibold tracking-[-0.01em] text-bone">
+                {viewing.name}
+              </span>
+              {viewing.alt && viewing.alt !== viewing.name && (
+                <span className="max-w-[72ch] text-[13px] leading-relaxed text-mist">
+                  {viewing.alt}
+                </span>
+              )}
+              <span className="mt-1 font-mono text-[9.5px] uppercase tracking-[0.2em] text-dim">
+                BSM Security Agency · Goa
+              </span>
+            </figcaption>
+          </figure>,
           document.body,
         )}
     </>

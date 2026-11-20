@@ -35,6 +35,7 @@ export default function ClientMarquee() {
                   <img
                     src={logo}
                     alt={copy ? "" : `${client.name} logo`}
+                    data-no-preview
                     loading="lazy"
                     decoding="async"
                     draggable={false}

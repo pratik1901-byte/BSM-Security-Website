@@ -117,6 +117,8 @@ export default function ClientsPage() {
                     <img
                       src={logo}
                       alt={`${client.name} logo`}
+                      /* The organisation's own mark — not ours to show larger. */
+                      data-no-preview
                       loading="lazy"
                       decoding="async"
                       className="max-h-full max-w-full object-contain transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"

@@ -78,6 +78,7 @@ export function MediaFrame({
                 preload={priority}
                 sizes={sizes}
                 data-clip-img
+                data-name={shot?.label ?? label}
                 className={shot?.ratio ? "object-contain" : "object-cover"}
                 /* Which part of a cropped photograph stays in view. */
                 style={shot?.focus ? { objectPosition: shot.focus } : undefined}
