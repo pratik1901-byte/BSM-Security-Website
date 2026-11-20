@@ -7,6 +7,17 @@
  * certifications, client names, headcount, years of operation or statistics.
  */
 
+const getSiteUrl = () => {
+  if (process.env.NEXT_PUBLIC_SITE_URL) {
+    return process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
+  }
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    const host = process.env.VERCEL_PROJECT_PRODUCTION_URL.replace(/\/$/, "");
+    return host.startsWith("http") ? host : `https://${host}`;
+  }
+  return "https://bsmsecurityagency.vercel.app";
+};
+
 export const site = {
   name: "BSM",
   legalName: "BSM SECURITY AGENCY",
@@ -18,16 +29,11 @@ export const site = {
    * built on: the canonical link, the sitemap, the structured data and the
    * share cards.
    *
-   * It has to be an address that answers. bsmsecurityagency.com is
-   * registered but not yet pointed at this deployment — it returns an empty
-   * JSON placeholder, and /og-image/home.png on it is a 404 — so while it
-   * stood here WhatsApp and every other scraper fetched a dead URL and
-   * showed no preview at all.
-   *
-   * Change this one line the day the domain is connected in Vercel, and the
-   * canonical, the sitemap and the cards all follow.
+   * Defaults to https://bsmsecurityagency.vercel.app. When bsmsecurityagency.com
+   * is connected and assigned in Vercel, it can be set via NEXT_PUBLIC_SITE_URL
+   * or automatically picked up via VERCEL_PROJECT_PRODUCTION_URL.
    */
-  url: "https://bsm-security-website.vercel.app",
+  url: getSiteUrl(),
   locale: "en_IN",
   region: "Goa, India",
 

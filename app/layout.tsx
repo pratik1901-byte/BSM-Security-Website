@@ -60,11 +60,22 @@ export const metadata: Metadata = {
     siteName: brand.name,
     title: `${brand.name} — ${site.tagline}`,
     description: site.description,
+    images: [
+      {
+        url: "/og-image/home.png",
+        secureUrl: `${site.url}/og-image/home.png`,
+        width: 1200,
+        height: 630,
+        type: "image/png",
+        alt: `${brand.name} — Security Guards & Security Services in Goa`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${brand.name} — Security Agency in Goa`,
     description: site.description,
+    images: ["/og-image/home.png"],
   },
   robots: {
     index: true,

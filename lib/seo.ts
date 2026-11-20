@@ -57,7 +57,15 @@ const CARDS: Record<string, string> = {
 
 function shareImage(path: string, alt: string) {
   const name = CARDS[path.replace(/\/$/, "") || "/"] ?? "home";
-  return { url: `/og-image/${name}.png`, width: 1200, height: 630, type: "image/png", alt };
+  const relativeUrl = `/og-image/${name}.png`;
+  return {
+    url: relativeUrl,
+    secureUrl: `${site.url}${relativeUrl}`,
+    width: 1200,
+    height: 630,
+    type: "image/png",
+    alt,
+  };
 }
 
 export function pageMetadata({
