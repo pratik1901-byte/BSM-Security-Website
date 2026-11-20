@@ -12,6 +12,15 @@ const nextConfig: NextConfig = {
    */
   output: "export",
 
+  /**
+   * sharp is used by lib/og.tsx to square the portraits on the About share
+   * card. It is a native module: bundling it into the build output breaks
+   * it, so it is required at run time from node_modules instead. Harmless
+   * locally, where the bundler resolves it either way; it is the hosted
+   * build that minds.
+   */
+  serverExternalPackages: ["sharp"],
+
   /** Every page becomes its own folder with an index.html inside. */
   trailingSlash: true,
 
