@@ -238,6 +238,13 @@ export const media = {
     brief: "Supplied by BSM. Aquem, Margao.",
     ratio: "1600 / 900",
   },
+  headOfficeCabinWide: {
+    src: "/media/offices/head-office-cabin-wide.webp",
+    alt: "The cabin at BSM's Head Office, the board of DGR-sponsored agencies on the panelled wall behind the desk",
+    label: "Head Office — the cabin",
+    brief: "Supplied by BSM. Aquem, Margao.",
+    ratio: "1600 / 900",
+  },
   headOfficeAdminDesks: {
     src: "/media/offices/head-office-admin-desks.webp",
     alt: "Two members of the administration team working at computers beside the office printers",
