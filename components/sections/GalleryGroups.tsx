@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
-import { gallery, galleryGroups, type GalleryItem } from "@/lib/media";
+import { gallery, galleryGroups, groupId, type GalleryItem } from "@/lib/media";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { Section, SectionLabel } from "@/components/ui/Section";
 import { MediaFrame } from "@/components/ui/MediaFrame";
@@ -11,9 +11,8 @@ import { setScrollLocked } from "@/components/layout/SmoothScroll";
 /** Heading for each gallery group. */
 const GROUP_TITLES: Record<(typeof galleryGroups)[number], string> = {
   Personnel: "The people on post.",
-  Operations: "Briefings, rounds and records.",
-  Sites: "The environments we cover.",
-  Goa: "Where we work.",
+  "Head Office": "Aquem, Margao.",
+  "Branch Office": "Chimbel, Panjim.",
 };
 
 /** Only frames with a photograph can be opened full screen. */
@@ -35,7 +34,7 @@ export default function GalleryGroups() {
         return (
           <Section
             key={group}
-            id={group.toLowerCase()}
+            id={groupId(group)}
             label={`Gallery — ${group}`}
             className={groupIndex % 2 === 1 ? "bg-ink" : ""}
           >

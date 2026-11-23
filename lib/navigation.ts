@@ -11,7 +11,7 @@
 
 import { clients, offices, site, type ServiceSlug } from "./site";
 import { leaders } from "./about";
-import { galleryGroups } from "./media";
+import { galleryGroups, groupId } from "./media";
 
 export type Shortcut = { id: string; label: string };
 
@@ -86,7 +86,7 @@ export const shortcuts = {
     { id: "roster", label: "Our Clients" },
     { id: "get-in-touch", label: "Become a Client" },
   ],
-  gallery: galleryGroups.map((g) => ({ id: g.toLowerCase(), label: g })),
+  gallery: galleryGroups.map((g) => ({ id: groupId(g), label: g })),
   contact: [
     { id: "channels", label: "Call & WhatsApp" },
     { id: "enquiry", label: "Enquiry Form" },

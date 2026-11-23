@@ -19,6 +19,6 @@
 
 export type { Shot, GalleryItem } from "./types";
 export { media, logo, type MediaKey } from "./photos";
-export { gallery, galleryGroups } from "./gallery";
+export { gallery, galleryGroups, groupId } from "./gallery";
 export { clientLogos } from "./client-logos";
 export { serviceShots } from "./services";

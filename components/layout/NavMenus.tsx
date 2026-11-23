@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import { services, site, offices, clients } from "@/lib/site";
 import { leaders, legacy } from "@/lib/about";
-import { gallery, galleryGroups, serviceShots, media } from "@/lib/media";
+import { gallery, galleryGroups, groupId, serviceShots, media } from "@/lib/media";
 import { titleCase, type MenuKey } from "@/lib/navigation";
 import { TransitionLink } from "./PageTransition";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
@@ -528,7 +528,7 @@ function GalleryMenu({ onNavigate }: MenuProps) {
           return (
             <TransitionLink
               key={group}
-              href={`/gallery#${group.toLowerCase()}`}
+              href={`/gallery#${groupId(group)}`}
               onNavigate={onNavigate}
               className="menu-anim card card-ink group relative block aspect-[16/10] p-0"
             >
