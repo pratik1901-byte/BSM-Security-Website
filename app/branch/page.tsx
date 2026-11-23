@@ -58,7 +58,7 @@ export const metadata: Metadata = pageMetadata({
 /** One photograph per office. Shown only once BSM supplies it. */
 const officeShots = {
   "head-office": media.headOffice,
-  "branch-office-goa": media.branchOfficeGoa,
+  "branch-office-goa": media.branchOfficeCabin,
 } as const;
 
 /** Turn-by-turn directions to an address, in Google Maps. */
@@ -330,7 +330,10 @@ function OfficeBlock({ office, tinted }: { office: Office; tinted: boolean }) {
           {shot.src && (
             <MediaFrame
               shot={shot}
-              ratio="16 / 10"
+              /* Each office photograph keeps its own shape. Forcing one ratio
+                 on both cropped the Branch Office frame — a tall photograph —
+                 straight through the desk it was taken for. */
+              ratio={shot.ratio ?? "16 / 10"}
               parallax={0}
               sizes="(max-width: 1024px) 100vw, 40vw"
             />

@@ -60,7 +60,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       path: "/branch",
       priority: 0.7,
       changeFrequency: "yearly",
-      images: images([media.headOffice.src, media.branchOfficeGoa.src]),
+      images: images([media.headOffice.src, media.branchOfficeCabin.src]),
     },
     {
       path: "/gallery",

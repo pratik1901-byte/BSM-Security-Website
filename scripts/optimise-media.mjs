@@ -39,6 +39,9 @@ const PROFILES = [
      Bounding both sides keeps a tall frame from shipping three times the
      bytes of a wide one for the same area on screen. */
   { match: "media/offices", width: 1600, height: 1600, webp: { quality: 78, effort: 6, smartSubsample: true } },
+  /* Gallery photographs of personnel on post: BSM's own, already modest in
+     size. Bound both sides so a tall frame is not served at 1800 high. */
+  { match: "media/personnel", width: 1600, height: 1600, webp: { quality: 80, effort: 6, smartSubsample: true } },
   { match: "media", width: 1800, webp: { quality: 80, effort: 6, smartSubsample: true } },
 ];
 
