@@ -5,11 +5,11 @@
  * truth per image. An entry without a `shot` renders the placeholder frame and
  * states what photograph belongs there.
  *
- * Three groups: the people on post, and the two offices. The offices have no
- * photographs yet — BSM has not supplied them — so each stands as a single
- * placeholder frame saying so. Nothing generic is filed under them: a stock
- * lobby or a beach hut labelled "Head Office" would be a claim about BSM's
- * premises that is not true.
+ * Three groups: the people on post, and the two offices. The Head Office
+ * photographs are BSM's own. The Branch Office has none yet, so it stands as
+ * a single placeholder frame saying so — nothing generic is filed under it,
+ * because a stock lobby labelled "Branch Office" would be a claim about
+ * BSM's premises that is not true.
  */
 
 import type { GalleryItem } from "./types";
@@ -23,17 +23,17 @@ export const gallery: GalleryItem[] = [
   { shot: media.records, group: "Personnel", figure: "Fig. 05", ratio: "1400 / 2100" },
   { shot: media.night, group: "Personnel", figure: "Fig. 06", ratio: "1400 / 1050" },
 
-  {
-    group: "Head Office",
-    figure: "Fig. 07",
-    label: "Head Office — Aquem, Margao",
-    brief:
-      "Awaiting BSM's photograph of the Head Office at Kurtarkar Classic, Aquem, Margao.",
-    ratio: "16 / 10",
-  },
+  /* Wide and tall alternate so no column of the masonry runs away from the
+     others and leaves the row short. */
+  { shot: media.headOffice, group: "Head Office", figure: "Fig. 07", ratio: "1600 / 900" },
+  { shot: media.headOfficeRecords, group: "Head Office", figure: "Fig. 08", ratio: "900 / 1600" },
+  { shot: media.headOfficeAdminDesks, group: "Head Office", figure: "Fig. 09", ratio: "1600 / 900" },
+  { shot: media.headOfficeFrontDesk, group: "Head Office", figure: "Fig. 10", ratio: "900 / 1600" },
+  { shot: media.headOfficeCabin, group: "Head Office", figure: "Fig. 11", ratio: "900 / 1600" },
+  { shot: media.headOfficeCabinMeeting, group: "Head Office", figure: "Fig. 12", ratio: "900 / 1600" },
   {
     group: "Branch Office",
-    figure: "Fig. 08",
+    figure: "Fig. 13",
     label: "Branch Office — Chimbel, Panjim",
     brief:
       "Awaiting BSM's photograph of the Branch Office at Kadamba Govt Housing Society, Chimbel.",

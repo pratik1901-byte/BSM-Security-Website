@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
-import { gallery, galleryGroups } from "@/lib/media";
+import { gallery, galleryGroups, groupId } from "@/lib/media";
 import { shortcuts } from "@/lib/navigation";
 import { JsonLd, breadcrumbSchema } from "@/lib/schema";
 import { PageHero } from "@/components/ui/PageHero";
@@ -43,17 +43,26 @@ export default function GalleryPage() {
         }
         lead="Personnel on post, briefings and patrol rounds, and the sites we cover across Goa — filed by what each photograph shows. Select any photograph to see it full screen."
       >
-        {/* One cover card per group. */}
-        <div className="mt-10 lg:mt-[clamp(1.5rem,4.5svh,3.25rem)] grid grid-cols-2 gap-4 lg:grid-cols-4" data-stagger>
-          {galleryGroups.map((group) => {
+        {/* One cover card per group — three columns for three groups, so the
+            row ends where the page does instead of leaving a gap on the
+            right. Two across on a phone, the last card spanning both. */}
+        <div
+          className="mt-10 grid grid-cols-2 gap-4 lg:mt-[clamp(1.5rem,4.5svh,3.25rem)] lg:grid-cols-3"
+          data-stagger
+        >
+          {galleryGroups.map((group, i) => {
             const items = gallery.filter((g) => g.group === group);
             const cover = items.find((g) => g.shot?.src)?.shot;
             return (
               <TransitionLink
                 key={group}
-                href={`#${group.toLowerCase()}`}
+                href={`#${groupId(group)}`}
                 data-stagger-item
-                className="card card-void group relative block aspect-[4/3] p-0 lg:aspect-auto lg:h-[clamp(9rem,26svh,17rem)]"
+                className={`card card-void group relative block aspect-[4/3] p-0 lg:aspect-auto lg:h-[clamp(9rem,26svh,17rem)] ${
+                  i === galleryGroups.length - 1 && galleryGroups.length % 2 === 1
+                    ? "col-span-2 lg:col-span-1"
+                    : ""
+                }`}
               >
                 {cover && (
                   <img

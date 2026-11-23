@@ -229,12 +229,49 @@ export const media = {
     brief: "Supplied by BSM. Master in assets-src/media/people.",
     focus: "50% 20%",
   },
+  /* The Head Office at Aquem, Margao. Supplied by BSM; the alt text says
+     what is visible and nothing about who the people are. */
   headOffice: {
-    src: "",
-    alt: "",
-    label: "Head Office — Aquem, Margao",
-    brief:
-      "Awaiting BSM's photograph of the Head Office. Drop the file into /public/media and set `src`.",
+    src: "/media/offices/head-office-floor.webp",
+    alt: "The main room of BSM's Head Office, desks along one wall and a partitioned cabin beyond",
+    label: "Head Office — the main room",
+    brief: "Supplied by BSM. Aquem, Margao.",
+    ratio: "1600 / 900",
+  },
+  headOfficeAdminDesks: {
+    src: "/media/offices/head-office-admin-desks.webp",
+    alt: "Two members of the administration team working at computers beside the office printers",
+    label: "Administration desks",
+    brief: "Supplied by BSM. Aquem, Margao.",
+    ratio: "1600 / 900",
+  },
+  headOfficeRecords: {
+    src: "/media/offices/head-office-records.webp",
+    alt: "A manager writing in a register at his desk, the administration desks behind the partition",
+    label: "Records at the Head Office",
+    brief: "Supplied by BSM. Aquem, Margao.",
+    ratio: "900 / 1600",
+  },
+  headOfficeFrontDesk: {
+    src: "/media/offices/head-office-front-desk.webp",
+    alt: "A manager taking a call at his desk, with the administration desks across the room",
+    label: "Taking a call",
+    brief: "Supplied by BSM. Aquem, Margao.",
+    ratio: "900 / 1600",
+  },
+  headOfficeCabin: {
+    src: "/media/offices/head-office-cabin.webp",
+    alt: "The partner's cabin at the Head Office, panelled in wood behind a glass-topped desk",
+    label: "The cabin",
+    brief: "Supplied by BSM. Aquem, Margao.",
+    ratio: "900 / 1600",
+  },
+  headOfficeCabinMeeting: {
+    src: "/media/offices/head-office-cabin-meeting.webp",
+    alt: "A meeting under way across the desk in the cabin at the Head Office",
+    label: "A meeting in the cabin",
+    brief: "Supplied by BSM. Aquem, Margao.",
+    ratio: "900 / 1600",
   },
   branchOfficeGoa: {
     src: "",

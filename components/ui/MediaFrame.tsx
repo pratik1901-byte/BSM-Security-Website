@@ -20,6 +20,12 @@ type MediaFrameProps = {
   sizes?: string;
   /** Show the label as a glass chip over the photograph. */
   chip?: boolean;
+  /**
+   * Whether the caption names the photograph beside its figure number. The
+   * gallery sets this false: every frame there is already a photograph of
+   * the thing the group is named after, so the caption only repeated it.
+   */
+  captionLabel?: boolean;
 };
 
 /**
@@ -51,6 +57,7 @@ export function MediaFrame({
   priority = false,
   sizes = "(max-width: 768px) 100vw, 50vw",
   chip = false,
+  captionLabel = true,
 }: MediaFrameProps) {
   const src = srcProp ?? shot?.src;
   const alt = altProp ?? shot?.alt;
@@ -99,7 +106,7 @@ export function MediaFrame({
       {figure && (
         <figcaption className="mt-4 flex items-baseline justify-between gap-4 px-1 font-mono text-[10px] uppercase tracking-[0.2em] text-dim">
           <span className="text-brass/80">{figure}</span>
-          <span className="truncate text-right text-dim/80">{label}</span>
+          {captionLabel && <span className="truncate text-right text-dim/80">{label}</span>}
         </figcaption>
       )}
     </figure>

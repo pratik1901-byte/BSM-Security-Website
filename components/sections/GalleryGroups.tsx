@@ -15,6 +15,18 @@ const GROUP_TITLES: Record<(typeof galleryGroups)[number], string> = {
   "Branch Office": "Chimbel, Panjim.",
 };
 
+/**
+ * The column count for a group, capped at how many photographs it holds so
+ * no column is left empty. Written as whole class strings rather than built
+ * from parts, because Tailwind only ships the classes it can see.
+ */
+function columnsFor(count: number) {
+  if (count <= 1) return "columns-1";
+  if (count === 2) return "columns-1 sm:columns-2";
+  if (count === 3) return "columns-1 sm:columns-2 lg:columns-3";
+  return "columns-1 sm:columns-2 lg:columns-3 2xl:columns-4";
+}
+
 /** Only frames with a photograph can be opened full screen. */
 const viewable = gallery.filter((item) => item.shot?.src);
 
@@ -54,11 +66,18 @@ export default function GalleryGroups() {
             {/* Columns, not a grid: a grid row is as tall as its tallest
                 tile and leaves the rest short, which is why every picture
                 used to be cropped to one shape. Columns let each keep its
-                own height, so nothing is cut. */}
-            <div
-              className="mt-14 columns-1 gap-5 sm:columns-2 lg:columns-3 [&>*]:mb-5 [&>*]:break-inside-avoid"
-              data-stagger
-            >
+                own height, so nothing is cut.
+
+                One column on a phone, two on a tablet, three on a desktop
+                and four once the viewport is very wide — which is what a
+                desktop reports at 75% or 67% zoom. Without that fourth
+                column a portrait photograph grows with the column and ends
+                up taller than the screen.
+
+                Never more columns than there are photographs: a group of
+                two across three columns leaves the third empty, which is
+                the gap down the right-hand side. */}
+            <div className={`mt-14 gap-5 [&>*]:mb-5 [&>*]:break-inside-avoid ${columnsFor(items.length)}`} data-stagger>
               {items.map((item, i) => (
                 <GalleryTile
                   key={`${group}-${i}`}
@@ -86,6 +105,7 @@ function GalleryTile({ item, onOpen }: { item: GalleryItem; onOpen: () => void }
       label={item.label}
       note={item.brief}
       figure={item.figure}
+      captionLabel={false}
       ratio={item.ratio ?? "4 / 5"}
       parallax={0}
       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -102,12 +122,12 @@ function GalleryTile({ item, onOpen }: { item: GalleryItem; onOpen: () => void }
           className="group block w-full cursor-zoom-in rounded-[2rem] text-left"
         >
           {frame}
-          {/* Hover affordance: an expand chip and the caption sliding up. */}
+          {/* Hover affordance: the expand chip alone. The caption that slid
+              up over the photograph named it a second time, after the
+              figure line below already carried the number — and on these
+              frames the name said nothing the group heading had not. */}
           <span className="pointer-events-none absolute right-4 top-4 grid h-10 w-10 scale-75 place-items-center rounded-full bg-brass text-void opacity-0 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-100 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:opacity-100">
             <Expand className="h-4 w-4" strokeWidth={1.75} />
-          </span>
-          <span className="glass pointer-events-none absolute bottom-[3.25rem] left-4 right-4 translate-y-3 rounded-2xl px-4 py-3 text-sm text-bone opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-100">
-            {item.shot?.label}
           </span>
         </button>
       ) : (

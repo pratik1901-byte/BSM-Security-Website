@@ -35,6 +35,10 @@ const PROFILES = [
   /* Logos fit inside a box, so tall marks (crests, emblems) stay light too. */
   { match: "media/clients", width: 640, height: 360, webp: { quality: 92, alphaQuality: 100, effort: 6 } },
   { match: "media/people", width: 1400, webp: { quality: 84, effort: 6 } },
+  /* Office interiors are shot on a phone, so a portrait one is 4032px tall.
+     Bounding both sides keeps a tall frame from shipping three times the
+     bytes of a wide one for the same area on screen. */
+  { match: "media/offices", width: 1600, height: 1600, webp: { quality: 78, effort: 6, smartSubsample: true } },
   { match: "media", width: 1800, webp: { quality: 80, effort: 6, smartSubsample: true } },
 ];
 
