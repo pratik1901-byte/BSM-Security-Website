@@ -26,7 +26,7 @@ export const gallery: GalleryItem[] = [
   /* The cover first: the rail takes a group's cover from its first frame
      that has a photograph. Then wide and tall alternate, so no column of
      the masonry runs away from the others and leaves the row short. */
-  { shot: media.headOfficeCabinWide, group: "Head Office", figure: "Fig. 07", ratio: "1600 / 900" },
+  { shot: media.headOfficeCabinWide, group: "Head Office", figure: "Fig. 07", ratio: "1600 / 720" },
   { shot: media.headOfficeRecords, group: "Head Office", figure: "Fig. 08", ratio: "900 / 1600" },
   { shot: media.headOffice, group: "Head Office", figure: "Fig. 09", ratio: "1600 / 900" },
   { shot: media.headOfficeFrontDesk, group: "Head Office", figure: "Fig. 10", ratio: "900 / 1600" },
