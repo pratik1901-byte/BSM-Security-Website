@@ -222,7 +222,7 @@ function Lightbox({
       className="fixed inset-0 z-[129] flex flex-col bg-void/95 backdrop-blur-xl"
       role="dialog"
       aria-modal="true"
-      aria-label="Photograph viewer"
+      aria-label={`Photograph viewer — ${item.shot?.label ?? item.figure}`}
     >
       <div className="shell flex items-center justify-between gap-4 py-5">
         <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-dim">
@@ -274,9 +274,11 @@ function Lightbox({
         </button>
       </div>
 
+      {/* The figure number alone, as on the frame it was opened from. The
+          name is still announced to a screen reader through the dialog's
+          aria-label; it is only the sighted caption that goes. */}
       <div className="shell py-6 text-center">
-        <p className="font-display text-lg font-semibold text-bone">{item.shot.label}</p>
-        <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.2em] text-dim">{item.figure}</p>
+        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-dim">{item.figure}</p>
       </div>
     </div>
   );
