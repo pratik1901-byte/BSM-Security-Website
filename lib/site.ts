@@ -620,7 +620,7 @@ export const coreStrengths = [
 ];
 
 export const vision =
-  "To establish BSM Security Agency as a trusted and respected name in the security industry through professional management, disciplined personnel and reliable security solutions.";
+  "To become a benchmark for excellence in the security industry, recognised for professional leadership, personnel integrity, operational discipline, and unwavering commitment to safety.";
 
 export const mission =
   "To safeguard people, property, infrastructure and business operations by delivering dependable, professionally managed and well-supervised security services, driven by discipline, integrity and commitment.";
