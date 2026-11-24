@@ -57,8 +57,8 @@ export const metadata: Metadata = pageMetadata({
 
 /** One photograph per office. Shown only once BSM supplies it. */
 const officeShots = {
-  "head-office": media.headOfficeExterior,
-  "branch-office-goa": media.branchOfficeExterior,
+  "head-office": media.headOfficeCabinWide,
+  "branch-office-goa": media.branchOfficeCabin,
 } as const;
 
 /** Turn-by-turn directions to an address, in Google Maps. */
@@ -270,11 +270,25 @@ function ContactRow({
 
 function OfficeBlock({ office, tinted }: { office: Office; tinted: boolean }) {
   const shot = officeShots[office.id as keyof typeof officeShots];
-  /* The band both the photograph and the map sit in. Capping its height
-     is what keeps the map on the screen, and letting the photograph take
-     that height and derive its own width is what shows a tall photograph
-     whole without it running down the page. */
-  const band = "lg:h-[clamp(20rem,54svh,34rem)]";
+
+  /**
+   * How the photograph and the map share the row, which depends on the shape
+   * of the photograph — the two offices are not the same.
+   *
+   * A tall photograph is sized by its height: the row is capped so the map
+   * stays on the screen, and the frame works out its own width from that,
+   * which is what shows a 9:16 frontage whole instead of running it down the
+   * page. A wide one cannot be treated the same way — at 1.90 it would come
+   * out 1034px across at this height and leave the map a 680px offcut — so
+   * it takes a fixed share of the width instead and its own ratio sets the
+   * row's height, with the map stretching to match.
+   *
+   * Either way the two line up top and bottom, and nothing is cropped.
+   */
+  const [rw, rh] = (shot?.ratio ?? "16 / 10").split("/").map((n) => Number.parseFloat(n));
+  const tall = rw / rh < 1;
+  const band = tall ? "lg:h-[clamp(20rem,54svh,34rem)]" : "";
+  const photoBox = tall ? "lg:h-full lg:shrink-0" : "lg:w-[44%] lg:shrink-0";
   const surface = tinted ? "card-void" : "card-ink";
   const primaryPhone = office.phones[0];
   const primaryWhatsApp = office.whatsapps[0];
@@ -342,23 +356,27 @@ function OfficeBlock({ office, tinted }: { office: Office; tinted: boolean }) {
           underneath, which is also where they are easiest to read. */}
       <div className={`mt-12 flex flex-col gap-5 lg:flex-row lg:items-stretch ${band}`}>
         {shot.src && (
-          <div className="min-w-0 lg:h-full lg:shrink-0" data-reveal="up">
+          <div className={`min-w-0 ${photoBox}`} data-reveal="up">
             <MediaFrame
               shot={shot}
               /* Framed to the photograph's own ratio and shown whole, never
-                 cropped. `fillHeight` makes the height the fixed side, so a
-                 9:16 frontage comes out narrow beside the map instead of
-                 seven hundred pixels tall. */
+                 cropped. A tall one is sized by its height; a wide one by
+                 its width — see the note on `tall` above. */
               ratio={shot.ratio ?? "16 / 10"}
-              fillHeight
-              className="lg:h-full"
+              fillHeight={tall}
+              className={tall ? "lg:h-full" : ""}
               parallax={0}
-              sizes="(max-width: 1024px) 100vw, 28vw"
+              sizes="(max-width: 1024px) 100vw, 44vw"
             />
           </div>
         )}
 
-        <div className="min-w-0 lg:h-full lg:flex-1" data-reveal="fade">
+        {/* No `h-full` here: when the photograph is the wide one the row has
+            no height of its own to take a percentage of, and the column
+            collapsed to nothing — a 948x0 map. `items-stretch` on the row
+            already gives this column the full height, and the map inside
+            then has something definite to measure its own against. */}
+        <div className="min-w-0 lg:flex-1" data-reveal="fade">
           <MapEmbed
             src={office.mapEmbed}
             title={office.mapTitle}
