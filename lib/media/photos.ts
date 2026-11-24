@@ -39,12 +39,15 @@ export const media = {
     brief: "Supplied by BSM — officer in uniform, shot in portrait for the hero.",
     focus: "50% 13%",
   },
+  /* Points at the personnel folder rather than carrying a second copy of
+     the same picture: this is the frame the gallery opens its Personnel
+     group with, and one file is one file. */
   briefing: {
-    src: "/media/photos/briefing-team.webp",
-    alt: "BSM officers on watch across an open floor, silhouetted against a wall of windows at first light",
-    label: "On watch at first light",
-    brief: "Officers holding an open floor against the windows at dawn.",
-    ratio: "1448 / 1086",
+    src: "/media/personnel/personnel-airport-terminal.webp",
+    alt: "A BSM detail drawn up inside an airport terminal beside the departure doors",
+    label: "Personnel on post",
+    brief: "Supplied by BSM. A shift on post at the terminal.",
+    ratio: "1289 / 806",
   },
   publicSectorSecurity: {
     src: "/media/services/public-sector-security.webp",

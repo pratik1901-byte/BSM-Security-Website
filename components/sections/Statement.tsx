@@ -19,7 +19,7 @@ export default function Statement() {
           <div className="mt-10 hidden lg:block" data-tilt="4">
             <MediaFrame
               shot={media.briefing}
-              figure="Fig. 02 / Briefing"
+              figure="Fig. 02 / On post"
               ratio="3 / 4"
               chip
               sizes="(max-width: 1024px) 100vw, 28vw"
