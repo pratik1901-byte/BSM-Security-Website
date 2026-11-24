@@ -19,12 +19,103 @@ const GROUP_TITLES: Record<(typeof galleryGroups)[number], string> = {
  * The column count for a group, capped at how many photographs it holds so
  * no column is left empty. Written as whole class strings rather than built
  * from parts, because Tailwind only ships the classes it can see.
+ *
+ * One column on a phone, two on a tablet in either orientation, three on a
+ * laptop and four once the viewport is very wide — which is also what a
+ * desktop reports at 75% or 67% zoom.
  */
 function columnsFor(count: number) {
-  if (count <= 1) return "columns-1";
-  if (count === 2) return "columns-1 sm:columns-2";
-  if (count === 3) return "columns-1 sm:columns-2 lg:columns-3";
-  return "columns-1 sm:columns-2 lg:columns-3 2xl:columns-4";
+  if (count <= 1) return "grid-cols-1";
+  if (count === 2) return "grid-cols-1 sm:grid-cols-2";
+  if (count === 3) return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
+  /* Four photographs divide evenly into one, two or four columns — never
+     three, which leaves 2-1-1 and one column running past the others. Two
+     across up to a wide desktop, then four — both fill the row, so nothing
+     is left standing empty down the right-hand side. */
+  if (count === 4) return "grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4";
+  /* Seven is the other count that will not sit in three columns: the Head
+     Office group is four 9:16 portraits and three landscapes, and a portrait
+     is over three times the height of a landscape. Three columns must give
+     one of them two portraits, which leaves its neighbours hundreds of
+     pixels short — the staircase of empty space at the foot of the section.
+     Four columns take one portrait each and share the landscapes out. */
+  if (count === 7) return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4";
+  return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4";
+}
+
+/**
+ * Masonry that reads across, not down.
+ *
+ * CSS `columns` fills one column to the bottom before starting the next, so
+ * on a two-column tablet Fig. 01 sat beside Fig. 06 and the numbering looked
+ * shuffled. A grid lays out across, which is the order people read in — but
+ * a grid row is as tall as its tallest tile, which is what used to force
+ * every photograph into one shape.
+ *
+ * So: a grid whose rows are one pixel tall, where each tile is told how many
+ * of those rows it covers. Order reads across, and every photograph still
+ * keeps its own height.
+ *
+ * Until the first measurement the grid is left on `auto` rows — a plain,
+ * correct grid — so the markup is never broken before hydration.
+ */
+function useMasonry(count: number) {
+  const grid = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = grid.current;
+    if (!el) return;
+
+    let busy = false;
+
+    const measure = () => {
+      if (busy) return;
+      busy = true;
+
+      const kids = Array.from(el.children) as HTMLElement[];
+      /* One column: rows are the tiles themselves, so spans would only get
+         in the way. Read the computed value rather than the breakpoint, so
+         this follows whatever the column classes actually resolved to. */
+      const cols = window.getComputedStyle(el).gridTemplateColumns.split(" ").length;
+
+      /* Release every tile so it sizes to its own content. A tile's height
+         cannot be read while a span is dictating it, and guessing it from
+         the picture plus the gutter is how tiles ended up overlapping: the
+         caption line is a few pixels taller than that sum. */
+      el.removeAttribute("data-masonry");
+      for (const k of kids) k.style.gridRowEnd = "";
+
+      if (cols < 2) {
+        busy = false;
+        return;
+      }
+
+      const heights = kids.map((k) => k.getBoundingClientRect().height);
+      el.setAttribute("data-masonry", "on");
+      kids.forEach((k, i) => {
+        k.style.gridRowEnd = `span ${Math.max(1, Math.ceil(heights[i]))}`;
+      });
+
+      busy = false;
+    };
+
+    measure();
+    /* Watch the pictures, not the tiles: a tile's height is what this hook
+       writes, so observing it would chase its own tail. */
+    const ro = new ResizeObserver(() => requestAnimationFrame(measure));
+    ro.observe(el);
+    for (const k of Array.from(el.children)) {
+      if (k.firstElementChild) ro.observe(k.firstElementChild);
+    }
+    const onOrient = () => window.setTimeout(measure, 200);
+    window.addEventListener("orientationchange", onOrient);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("orientationchange", onOrient);
+    };
+  }, [count]);
+
+  return grid;
 }
 
 /** Only frames with a photograph can be opened full screen. */
@@ -63,29 +154,16 @@ export default function GalleryGroups() {
               </p>
             </div>
 
-            {/* Columns, not a grid: a grid row is as tall as its tallest
-                tile and leaves the rest short, which is why every picture
-                used to be cropped to one shape. Columns let each keep its
-                own height, so nothing is cut.
-
-                One column on a phone, two on a tablet, three on a desktop
-                and four once the viewport is very wide — which is what a
-                desktop reports at 75% or 67% zoom. Without that fourth
-                column a portrait photograph grows with the column and ends
-                up taller than the screen.
-
-                Never more columns than there are photographs: a group of
-                two across three columns leaves the third empty, which is
-                the gap down the right-hand side. */}
-            <div className={`mt-14 gap-5 [&>*]:mb-5 [&>*]:break-inside-avoid ${columnsFor(items.length)}`} data-stagger>
+            {/* Never more columns than there are photographs: a group of two
+                across three columns leaves the third empty, which is the gap
+                down the right-hand side. See useMasonry for the row maths. */}
+            <GalleryGrid count={items.length}>
               {items.map((item, i) => (
-                <GalleryTile
-                  key={`${group}-${i}`}
-                  item={item}
-                  onOpen={() => setOpen(viewable.indexOf(item))}
-                />
+                <div key={`${group}-${i}`} className="self-start pb-5">
+                  <GalleryTile item={item} onOpen={() => setOpen(viewable.indexOf(item))} />
+                </div>
               ))}
-            </div>
+            </GalleryGrid>
           </Section>
         );
       })}
@@ -94,6 +172,22 @@ export default function GalleryGroups() {
         <Lightbox index={open} onIndex={setOpen} onClose={() => setOpen(null)} />
       )}
     </>
+  );
+}
+
+function GalleryGrid({ count, children }: { count: number; children: React.ReactNode }) {
+  const grid = useMasonry(count);
+  return (
+    <div
+      ref={grid}
+      data-stagger
+      /* `dense` is what keeps the columns level: without it the placement
+         cursor only moves forward, so a column that frees up early is left
+         unused and its neighbour runs hundreds of pixels past it. */
+      className={`mt-14 grid gap-x-5 [grid-auto-rows:auto] data-[masonry=on]:[grid-auto-flow:row_dense] data-[masonry=on]:[grid-auto-rows:1px] ${columnsFor(count)}`}
+    >
+      {children}
+    </div>
   );
 }
 

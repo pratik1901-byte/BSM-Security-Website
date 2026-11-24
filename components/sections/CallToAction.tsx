@@ -97,7 +97,7 @@ export default function CallToAction({
             <ul className="mt-3 space-y-3">
               {offices.map((office) => (
                 <li key={office.id}>
-                  <span className="block font-mono text-[9px] uppercase tracking-[0.18em] text-brass">
+                  <span className="block font-mono text-[11px] uppercase tracking-[0.16em] text-brass">
                     {office.kind}
                   </span>
                   <span className="mt-1 flex flex-col items-start gap-1">
@@ -126,7 +126,7 @@ export default function CallToAction({
             <ul className="mt-3 space-y-3">
               {site.contact.whatsappByOffice.map((line) => (
                 <li key={line.href}>
-                  <span className="block font-mono text-[9px] uppercase tracking-[0.18em] text-brass">
+                  <span className="block font-mono text-[11px] uppercase tracking-[0.16em] text-brass">
                     {line.label}
                   </span>
                   <a
@@ -150,7 +150,7 @@ export default function CallToAction({
             <ul className="mt-3 space-y-3">
               {emailsByOffice.map((group) => (
                 <li key={group.label}>
-                  <span className="block font-mono text-[9px] uppercase tracking-[0.18em] text-brass">
+                  <span className="block font-mono text-[11px] uppercase tracking-[0.16em] text-brass">
                     {group.label}
                   </span>
                   <span className="mt-1 flex flex-col items-start gap-1">
