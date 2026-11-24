@@ -153,7 +153,7 @@ export default function Hero() {
                 <span className="absolute h-2 w-2 animate-ping rounded-full bg-brass/60" />
                 <span className="relative h-1.5 w-1.5 rounded-full bg-brass" />
               </span>
-              <span className="eyebrow">Security Agency · India</span>
+              <span className="eyebrow">Security Agency · Goa, India</span>
             </div>
 
             <div className="relative mt-[clamp(1rem,2.6svh,1.75rem)] short-desktop:mt-2 pl-5 md:pl-7">

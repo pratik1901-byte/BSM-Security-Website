@@ -187,7 +187,7 @@ export default function Footer() {
           <p>© 2013 {site.legalName}. All rights reserved.</p>
           <p className="inline-flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-brass" aria-hidden="true" />
-            Goa, India
+            India
           </p>
         </div>
       </div>
