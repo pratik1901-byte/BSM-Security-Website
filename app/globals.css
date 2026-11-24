@@ -7,6 +7,23 @@
    on exactly those screens and leaves every other size untouched. */
 @custom-variant short-desktop (@media (min-width: 1024px) and (max-height: 820px));
 
+/* A tablet held landscape — an iPad, in practice. Wide enough for the
+   desktop breakpoints to fire, but squarer than any desktop screen, and
+   taller with it, which matters because `text-display` sizes partly off the
+   viewport height: on a 1366x1024 iPad the heading sets larger than on a
+   1440x900 desktop while sitting in a narrower column, so it wrapped to five
+   lines and left a column of empty space beside it.
+
+   Aspect ratio separates the two cleanly where width alone cannot — a
+   1366x768 laptop is 1.78 and keeps the desktop layout, a 1366x1024 iPad Pro
+   is 1.33 and gets this one.
+
+   The cut is at 1.55 rather than 1.5 because of the iPad mini: landscape it
+   is 1133x744, or 1.523, the squarest-but-one of the iPads and the only one
+   that 1.5 would have missed. The rest run 1.33 to 1.44, and the nearest
+   desktop shape is 16:10 at exactly 1.6, so 1.55 clears both sides. */
+@custom-variant tablet-wide (@media (min-width: 1024px) and (max-aspect-ratio: 31/20));
+
 /* --------------------------------------------------------------------------
    BSM design tokens
    Dark-first, single-theme art direction: near-black navy base, bone type,

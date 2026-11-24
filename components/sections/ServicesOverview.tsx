@@ -64,14 +64,19 @@ export default function ServicesOverview() {
 
   return (
     <Section id="services" label="Services">
-      <div className="grid gap-10 lg:grid-cols-12">
-        <div className="lg:col-span-5">
+      {/* On a tablet held landscape the heading and the paragraph stack,
+          as they already do on a phone. Side by side, the heading had five
+          of twelve columns and set larger than it does on a desktop, so it
+          ran to five lines against a three-line paragraph and left a
+          200px-deep hole beside it. Desktops are untouched. */}
+      <div className="grid gap-10 lg:grid-cols-12 tablet-wide:grid-cols-1">
+        <div className="lg:col-span-5 tablet-wide:col-span-full tablet-wide:col-start-auto">
           <SectionLabel index="04">What we do</SectionLabel>
-          <h2 data-split className="mt-8 text-display font-semibold text-bone">
+          <h2 data-split className="mt-8 text-display font-semibold text-bone text-balance">
             Security services, matched to the site.
           </h2>
         </div>
-        <div className="flex items-end lg:col-span-6 lg:col-start-7">
+        <div className="flex items-end lg:col-span-6 lg:col-start-7 tablet-wide:col-span-full tablet-wide:col-start-auto">
           <p data-reveal="up" className="text-lead text-justify text-mist">
             Ten service categories. Each one starts from the same place — a survey of your site
             and a written plan — and ends with personnel who know that specific gate, lobby or
