@@ -39,84 +39,12 @@ export const media = {
     brief: "Supplied by BSM — officer in uniform, shot in portrait for the hero.",
     focus: "50% 13%",
   },
-  heroDeployment: {
-    src: "/media/photos/hero-security-officer.webp",
-    alt: "BSM security officer in a black suit and tie wearing sunglasses and an earpiece, with a BSM Security lanyard and identification card",
-    label: "Personnel on post",
-    brief: "Supplied by BSM — officer in uniform, shot against a dark panelled wall.",
-  },
   briefing: {
     src: "/media/photos/briefing-team.webp",
     alt: "BSM officers on watch across an open floor, silhouetted against a wall of windows at first light",
     label: "On watch at first light",
     brief: "Officers holding an open floor against the windows at dawn.",
     ratio: "1448 / 1086",
-  },
-  patrol: {
-    src: "/media/photos/patrol-light-shadow.webp",
-    alt: "Uniformed officer walking through bands of light and shadow cast across a floor",
-    label: "Patrol round in progress",
-    brief: "Supervisor or guard walking a perimeter on a real site.",
-  },
-  records: {
-    src: "/media/photos/records-occurrence-book.webp",
-    alt: "Open notebook with handwritten entries, a pen and reading glasses on a dark desk",
-    label: "Occurrence book and gate register",
-    brief: "Close-up of the documentation kept on post.",
-  },
-  coast: {
-    src: "/media/photos/goa-beach-huts.webp",
-    alt: "Thatched beach huts and sun loungers along a palm-lined shore",
-    label: "Coastal property, Goa",
-    brief: "A resort or beachfront perimeter BSM covers, ideally after dark.",
-  },
-  estate: {
-    src: "/media/photos/industrial-hall-night.webp",
-    alt: "Long industrial hall lit at the far end, empty and dark in the foreground",
-    label: "Industrial estate, night shift",
-    brief: "Gate register and material movement control at an estate.",
-  },
-  goaLandscape: {
-    src: "/media/photos/coast-goa-evening.webp",
-    alt: "Palm trees above a rocky shoreline with the sea beyond",
-    label: "Goa coastline",
-    brief: "A recognisable Goa location relevant to BSM's coverage.",
-  },
-  guarding: {
-    src: "/media/photos/corporate-lobby-guard.webp",
-    alt: "Security officer standing in the dark lobby of a commercial building near the entrance doors",
-    label: "Guard on static post",
-    brief: "Uniformed personnel at a gate or lobby.",
-  },
-  corporate: {
-    src: "/media/photos/reception-desk-corporate.webp",
-    alt: "Dark marble reception counter in a corporate lobby",
-    label: "Reception and access control",
-    brief: "Front-desk security at a corporate entrance.",
-  },
-  residential: {
-    src: "/media/photos/residential-gate.webp",
-    alt: "Entrance gate and driveway of a walled residential property",
-    label: "Gated community entrance",
-    brief: "Gate management at a residential society.",
-  },
-  event: {
-    src: "/media/photos/event-crowd-barrier.webp",
-    alt: "Crowd pressed against a barrier at a night-time event",
-    label: "Event entry lane",
-    brief: "Accreditation and crowd flow at an event gate.",
-  },
-  industrial: {
-    src: "/media/photos/industrial-interior.webp",
-    alt: "Interior of a large industrial building with structural columns receding into darkness",
-    label: "Material gate check",
-    brief: "Inward and outward movement being documented.",
-  },
-  hospitality: {
-    src: "/media/photos/hotel-reception-dark.webp",
-    alt: "Low-lit hotel reception desk in dark stone with warm pendant lighting",
-    label: "Hotel lobby presence",
-    brief: "Guest-facing security in a hospitality setting.",
   },
   publicSectorSecurity: {
     src: "/media/services/public-sector-security.webp",
@@ -408,12 +336,6 @@ export const media = {
     label: "Branch Office — the manager's desk",
     brief: "Supplied by BSM. Kadamba Govt Housing Society, Chimbel, Panjim.",
     ratio: "3 / 4",
-  },
-  night: {
-    src: "/media/photos/night-torch.webp",
-    alt: "Torch beam thrown across the ground in near darkness",
-    label: "After dark",
-    brief: "Imagery follows once the specialised service list is verified.",
   },
 } satisfies Record<string, Shot>;
 
