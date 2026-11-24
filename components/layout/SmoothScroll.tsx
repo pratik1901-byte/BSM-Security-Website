@@ -110,6 +110,53 @@ export default function SmoothScroll() {
     if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
   }, []);
 
+  /**
+   * Arriving straight at an anchor — /gallery#head-office typed, pasted or
+   * followed from outside the site.
+   *
+   * The browser jumps to the anchor before the pictures below the fold have
+   * loaded, so every section is still the height of an empty frame when the
+   * scroll triggers take their measurements. They therefore believe the
+   * sections now on screen are far below it, and the reveals that should
+   * have fired never do: the page is left sitting at the anchor with most of
+   * its content at opacity 0, which reads as a page that never finished
+   * loading. The jump itself is lost too, because the real position of the
+   * anchor moves as those images arrive.
+   *
+   * So once things have settled: measure again, which fires the reveals for
+   * whatever is actually in view, then land on the anchor at its true
+   * position. Twice, because images keep arriving — the second pass is
+   * cheap and catches a slow one.
+   */
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (!hash) return;
+
+    let done = false;
+    const land = () => {
+      const id = decodeURIComponent(hash.slice(1));
+      const el = document.getElementById(id);
+      ScrollTrigger.refresh();
+      if (!el) return;
+      scrollToTarget(el.getBoundingClientRect().top + window.scrollY, { immediate: true });
+      done = true;
+    };
+
+    const first = window.setTimeout(land, 350);
+    const second = window.setTimeout(land, 1400);
+    const onLoad = () => {
+      if (!done) land();
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener("load", onLoad);
+
+    return () => {
+      window.clearTimeout(first);
+      window.clearTimeout(second);
+      window.removeEventListener("load", onLoad);
+    };
+  }, [pathname]);
+
   useEffect(() => {
     if (window.location.hash) return;
 
