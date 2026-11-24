@@ -30,9 +30,10 @@ function columnsFor(count: number) {
   if (count === 3) return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
   /* Four photographs divide evenly into one, two or four columns — never
      three, which leaves 2-1-1 and one column running past the others. Two
-     across up to a wide desktop, then four — both fill the row, so nothing
-     is left standing empty down the right-hand side. */
-  if (count === 4) return "grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4";
+     across from a tablet up, the same single row a desktop shows, so the
+     group reads the same way on both. One column on a phone. Never three,
+     which would leave 2-1-1 and one column running past the others. */
+  if (count === 4) return "grid-cols-1 md:grid-cols-4";
   /* Seven is the other count that will not sit in three columns: the Head
      Office group is four 9:16 portraits and three landscapes, and a portrait
      is over three times the height of a landscape. Three columns must give

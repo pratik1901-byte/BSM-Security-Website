@@ -338,18 +338,31 @@ export default function Navbar() {
                   compact ? "w-11 md:w-[3.25rem]" : "w-14 md:w-[4.5rem]"
                 }`}
               />
-              {/* Where you are, beside the mark — the agency's name on the
-                  home page, the section's name everywhere else. Only up to
-                  the desktop breakpoint, where the full nav already says it.
-                  `aria-hidden` because the link is already labelled and the
-                  heading of each page names it again. */}
-              <span
-                aria-hidden="true"
-                className="min-w-0 truncate font-display text-[15px] font-semibold tracking-[-0.01em] text-bone xl:hidden"
-              >
-                {hereLabel}
-              </span>
             </TransitionLink>
+
+            {/* Where you are: the agency's name on the home page, the name of
+                the section everywhere else. Centred on the bar itself rather
+                than sitting against the mark, so it reads as the title of the
+                page and not as part of the logo.
+
+                Absolutely placed, because the mark on the left and the call
+                and menu buttons on the right are nowhere near the same width
+                — centring it in the space between them would leave it
+                visibly off-centre. Capped and truncated so a long name never
+                reaches either side, and `pointer-events-none` so it cannot
+                swallow a tap meant for them.
+
+                Up to the desktop breakpoint only; above it the full menu
+                already says where you are. `aria-hidden` because the heading
+                of every page names it again straight below. */}
+            <span
+              aria-hidden="true"
+              className={`pointer-events-none absolute left-1/2 top-1/2 z-0 max-w-[48%] -translate-x-1/2 -translate-y-1/2 truncate text-center font-display font-semibold tracking-[-0.015em] text-bone transition-[font-size] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] xl:hidden ${
+                compact ? "text-[15px] md:text-[17px]" : "text-[17px] md:text-[19px]"
+              }`}
+            >
+              {hereLabel}
+            </span>
 
             {/* Desktop items */}
             <ul
