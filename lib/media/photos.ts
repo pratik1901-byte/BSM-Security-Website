@@ -355,18 +355,35 @@ export const media = {
     ratio: "1046 / 898",
   },
 
+  /* ---- Branch Office, Chimbel ------------------------------------------
+     All four cropped 3:4 from the bottom. The frames run a long way up the
+     panelling, so an uncropped one puts the desk in the last quarter and
+     three metres of empty wall above it. */
   branchOfficeCabin: {
     src: "/media/offices/branch-office-cabin.webp",
-    alt: "The cabin at BSM's Branch Office, a desk and laptop against the panelled wall",
+    alt: "Two members of the Branch Office team at the desk in the cabin, facing the camera",
     label: "Branch Office — the cabin",
-    brief:
-      "Supplied by BSM. Kadamba Govt Housing Society, Chimbel, Panjim. Cropped to the desk: the frame ran a long way up the panelling.",
+    brief: "Supplied by BSM. Kadamba Govt Housing Society, Chimbel, Panjim.",
     ratio: "3 / 4",
   },
   branchOfficeDesk: {
     src: "/media/offices/branch-office-desk.webp",
-    alt: "Work under way at the desk in BSM's Branch Office cabin",
+    alt: "Paperwork and a laptop under way across the desk in the Branch Office cabin",
     label: "Branch Office — at the desk",
+    brief: "Supplied by BSM. Kadamba Govt Housing Society, Chimbel, Panjim.",
+    ratio: "3 / 4",
+  },
+  branchOfficeAdmin: {
+    src: "/media/offices/branch-office-admin.webp",
+    alt: "A member of the Branch Office administration team working at the desk",
+    label: "Branch Office — administration",
+    brief: "Supplied by BSM. Kadamba Govt Housing Society, Chimbel, Panjim.",
+    ratio: "3 / 4",
+  },
+  branchOfficeManager: {
+    src: "/media/offices/branch-office-manager.webp",
+    alt: "Work under way at the laptop on the manager's side of the Branch Office desk",
+    label: "Branch Office — the manager's desk",
     brief: "Supplied by BSM. Kadamba Govt Housing Society, Chimbel, Panjim.",
     ratio: "3 / 4",
   },

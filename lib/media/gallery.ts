@@ -40,6 +40,8 @@ export const gallery: GalleryItem[] = [
   { shot: media.headOfficeCabinMeeting, group: "Head Office", figure: "Fig. 17", ratio: "900 / 1600" },
   { shot: media.branchOfficeCabin, group: "Branch Office", figure: "Fig. 18", ratio: "3 / 4" },
   { shot: media.branchOfficeDesk, group: "Branch Office", figure: "Fig. 19", ratio: "3 / 4" },
+  { shot: media.branchOfficeAdmin, group: "Branch Office", figure: "Fig. 20", ratio: "3 / 4" },
+  { shot: media.branchOfficeManager, group: "Branch Office", figure: "Fig. 21", ratio: "3 / 4" },
 ];
 
 /** The groups, in display order. Used for the gallery filter rail. */
