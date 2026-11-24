@@ -146,7 +146,7 @@ export default function Hero() {
 
       {/* ---- Copy ---------------------------------------------------------- */}
       <div className="shell relative flex flex-1 flex-col">
-        <div className="grid flex-1 items-center pb-8 pt-[max(46svh,18rem)] lg:grid-cols-12 lg:pb-[clamp(1rem,3svh,3rem)] lg:pt-[calc(var(--nav-h)+clamp(1rem,3svh,3.5rem))]">
+        <div className="grid flex-1 items-center pb-8 pt-[max(46svh,18rem)] lg:grid-cols-12 lg:pb-[clamp(1rem,3svh,3rem)] short-desktop:lg:pb-2 lg:pt-[calc(var(--nav-h)+clamp(1rem,3svh,3.5rem))]">
           <div className="hero-copy lg:col-span-7 lg:col-start-6 xl:col-span-6 xl:col-start-7">
             <div className="hero-eyebrow inline-flex items-center gap-3 rounded-full border border-white/[0.08] bg-void/40 py-1.5 pl-1.5 pr-4 backdrop-blur-md">
               <span className="relative grid h-6 w-6 place-items-center rounded-full bg-brass/15">
@@ -156,7 +156,7 @@ export default function Hero() {
               <span className="eyebrow">Security Agency · Goa, India</span>
             </div>
 
-            <div className="relative mt-[clamp(1rem,2.6svh,1.75rem)] pl-5 md:pl-7">
+            <div className="relative mt-[clamp(1rem,2.6svh,1.75rem)] short-desktop:mt-2 pl-5 md:pl-7">
               <span
                 className="hero-vrule absolute bottom-[0.35em] left-0 top-[0.25em] w-[3px] origin-top rounded-full bg-gradient-to-b from-brass-lit to-brass/30"
                 aria-hidden="true"
@@ -197,13 +197,27 @@ export default function Hero() {
               </h1>
             </div>
 
-            <p className="hero-sub mt-[clamp(0.9rem,2.6svh,1.75rem)] max-w-xl text-justify text-[clamp(1rem,min(1.3vw,2.3svh),1.25rem)] leading-[1.6] text-mist">
+            {/* Recruitment, under the headline and above the descriptive
+                paragraph. It carries `hero-sub` so it fades up on the same
+                beat as the paragraph rather than needing a tween of its own.
+                A brass bar and a brass-tinted ground lift it clear of the
+                paragraph below without a second pill competing with the
+                eyebrow above. */}
+            <p className="hero-sub mt-[clamp(0.85rem,2.2svh,1.35rem)] short-desktop:mt-1.5 flex max-w-xl items-baseline gap-3 rounded-r-md border-l-2 border-brass/70 bg-gradient-to-r from-brass/[0.09] to-transparent py-2 short-desktop:py-1.5 pl-3.5 pr-3 text-[clamp(0.9375rem,min(1.22vw,2.05svh),1.125rem)] leading-[1.5] text-bone">
+              <span>
+                Pan-India employment opportunities, with{" "}
+                <span className="font-semibold text-brass-lit">priority preference</span> for
+                candidates from Goa.
+              </span>
+            </p>
+
+            <p className="hero-sub mt-[clamp(0.9rem,2.6svh,1.75rem)] short-desktop:mt-2 max-w-xl text-justify text-[clamp(1rem,min(1.3vw,2.3svh),1.25rem)] leading-[1.6] text-mist">
               BSM provides trained security personnel and managed protection across India — from
               beachfront resorts and gated communities to corporate offices, industrial estates
               and events. Local presence, written deployment plans, supervision you can verify.
             </p>
 
-            <div className="mt-[clamp(1.1rem,3.2svh,2.25rem)] flex flex-wrap items-center gap-4">
+            <div className="mt-[clamp(1.1rem,3.2svh,2.25rem)] short-desktop:mt-3 flex flex-wrap items-center gap-4">
               <span className="hero-cta inline-block">
                 <RequestSecurityButton />
               </span>
@@ -234,7 +248,7 @@ export default function Hero() {
             columns on a phone, four from the small breakpoint up. The two
             long headings wrap to a second line, which is why every cell is
             aligned to its top and the row is not given a fixed height. */}
-        <div className="pb-8 lg:grid lg:grid-cols-12 lg:pb-[clamp(1.25rem,3.5svh,2.5rem)]">
+        <div className="pb-8 lg:grid lg:grid-cols-12 lg:pb-[clamp(1.25rem,3.5svh,2.5rem)] short-desktop:lg:pb-3">
           <ul className="grid grid-cols-2 gap-y-5 sm:grid-cols-4 sm:gap-y-0 lg:col-span-7 lg:col-start-6">
             {heroHighlights.map((item, i) => (
               <li

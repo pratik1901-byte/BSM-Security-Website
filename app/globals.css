@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* A wide but short screen — the 1366×768 and 1024×768 laptops. The hero is
+   pinned to one viewport, and on 768 px of height its stack of gaps is
+   already spending every pixel it has, so anything added to the copy pushes
+   the calls to action below the fold. `short-desktop:` tightens those gaps
+   on exactly those screens and leaves every other size untouched. */
+@custom-variant short-desktop (@media (min-width: 1024px) and (max-height: 820px));
+
 /* --------------------------------------------------------------------------
    BSM design tokens
    Dark-first, single-theme art direction: near-black navy base, bone type,
