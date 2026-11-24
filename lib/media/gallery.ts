@@ -30,21 +30,22 @@ export const gallery: GalleryItem[] = [
   { shot: media.personnelFlagPlant, group: "Personnel", figure: "Fig. 08", ratio: "1086 / 1448" },
   { shot: media.personnelEventReception, group: "Personnel", figure: "Fig. 09", ratio: "1600 / 1108" },
   { shot: media.personnelEventHall, group: "Personnel", figure: "Fig. 10", ratio: "1046 / 898" },
+  { shot: media.personnelAviationDepot, group: "Personnel", figure: "Fig. 11", ratio: "1289 / 689" },
 
   /* The cover stays first — the rail takes it from here. After that the
      four tall frames and the two remaining wide ones interleave so that no
      column collects both spare portraits and runs past its neighbours. */
-  { shot: media.headOfficeCabinWide, group: "Head Office", figure: "Fig. 11", ratio: "1600 / 842" },
-  { shot: media.headOfficeRecords, group: "Head Office", figure: "Fig. 12", ratio: "900 / 1600" },
-  { shot: media.headOfficeFrontDesk, group: "Head Office", figure: "Fig. 13", ratio: "900 / 1600" },
-  { shot: media.headOfficeCabin, group: "Head Office", figure: "Fig. 14", ratio: "900 / 1600" },
-  { shot: media.headOfficeCabinMeeting, group: "Head Office", figure: "Fig. 15", ratio: "900 / 1600" },
-  { shot: media.headOffice, group: "Head Office", figure: "Fig. 16", ratio: "1600 / 900" },
-  { shot: media.headOfficeAdminDesks, group: "Head Office", figure: "Fig. 17", ratio: "1600 / 900" },
-  { shot: media.branchOfficeCabin, group: "Branch Office", figure: "Fig. 18", ratio: "3 / 4" },
-  { shot: media.branchOfficeDesk, group: "Branch Office", figure: "Fig. 19", ratio: "3 / 4" },
-  { shot: media.branchOfficeAdmin, group: "Branch Office", figure: "Fig. 20", ratio: "3 / 4" },
-  { shot: media.branchOfficeManager, group: "Branch Office", figure: "Fig. 21", ratio: "3 / 4" },
+  { shot: media.headOfficeCabinWide, group: "Head Office", figure: "Fig. 12", ratio: "1600 / 842" },
+  { shot: media.headOfficeRecords, group: "Head Office", figure: "Fig. 13", ratio: "900 / 1600" },
+  { shot: media.headOfficeFrontDesk, group: "Head Office", figure: "Fig. 14", ratio: "900 / 1600" },
+  { shot: media.headOfficeCabin, group: "Head Office", figure: "Fig. 15", ratio: "900 / 1600" },
+  { shot: media.headOfficeCabinMeeting, group: "Head Office", figure: "Fig. 16", ratio: "900 / 1600" },
+  { shot: media.headOffice, group: "Head Office", figure: "Fig. 17", ratio: "1600 / 900" },
+  { shot: media.headOfficeAdminDesks, group: "Head Office", figure: "Fig. 18", ratio: "1600 / 900" },
+  { shot: media.branchOfficeCabin, group: "Branch Office", figure: "Fig. 19", ratio: "3 / 4" },
+  { shot: media.branchOfficeDesk, group: "Branch Office", figure: "Fig. 20", ratio: "3 / 4" },
+  { shot: media.branchOfficeAdmin, group: "Branch Office", figure: "Fig. 21", ratio: "3 / 4" },
+  { shot: media.branchOfficeManager, group: "Branch Office", figure: "Fig. 22", ratio: "3 / 4" },
 ];
 
 /** The groups, in display order. Used for the gallery filter rail. */

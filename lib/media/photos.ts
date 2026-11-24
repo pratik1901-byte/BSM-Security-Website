@@ -347,6 +347,13 @@ export const media = {
     brief: "Supplied by BSM. An event detail on duty.",
     ratio: "1600 / 1108",
   },
+  personnelAviationDepot: {
+    src: "/media/personnel/personnel-aviation-depot.webp",
+    alt: "A BSM detail drawn up for inspection at an aviation fuel depot, a fuel tanker and a patrol vehicle behind them",
+    label: "Personnel — aviation fuel depot",
+    brief: "Supplied by BSM. A shift inspection at an aviation fuel depot.",
+    ratio: "1289 / 689",
+  },
   personnelEventHall: {
     src: "/media/personnel/personnel-event-hall.webp",
     alt: "A BSM detail in a function hall, costumed performers at either end of the line",
