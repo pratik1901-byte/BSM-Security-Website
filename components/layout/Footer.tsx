@@ -97,7 +97,14 @@ export default function Footer() {
                 <span className="flex min-w-0 flex-col gap-3">
                   {offices.map((office) => (
                     <span key={office.id} className="flex min-w-0 flex-col gap-1">
-                      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-brass">
+                      {/* Head Office underlined — the one to try first. */}
+                      <span
+                        className={`font-mono text-[10px] uppercase tracking-[0.18em] text-brass${
+                          office.id === "head-office"
+                            ? " underline decoration-brass/50 decoration-1 underline-offset-[5px]"
+                            : ""
+                        }`}
+                      >
                         {office.kind}
                       </span>
                       {office.phones.map((line) => (
@@ -119,7 +126,7 @@ export default function Footer() {
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brass" strokeWidth={1.5} />
                 <span className="flex min-w-0 flex-col gap-3">
                   <span className="flex min-w-0 flex-col gap-1">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-brass">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-brass underline decoration-brass/50 decoration-1 underline-offset-[5px]">
                       {offices[0].kind}
                     </span>
                     <a href={offices[0].email.href} className="break-all text-mist hover:text-bone">

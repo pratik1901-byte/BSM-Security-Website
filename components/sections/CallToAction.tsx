@@ -4,6 +4,17 @@ import { site, offices } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
 import { RequestSecurityButton } from "@/components/ui/RequestSecurityButton";
 
+/**
+ * The office a number or address belongs to, as the small brass line above
+ * it. The Head Office is underlined — it is the one to try first, and an
+ * underline says so without adding another colour or weight to a card that
+ * already has three sizes of type in it.
+ */
+const officeLabel = (label: string) =>
+  `block font-mono text-[11px] uppercase tracking-[0.16em] text-brass${
+    label === offices[0].kind ? " underline decoration-brass/50 decoration-1 underline-offset-[5px]" : ""
+  }`;
+
 /** Email addresses by office, in the order the footer lists them. */
 const emailsByOffice = [
   {
@@ -97,9 +108,7 @@ export default function CallToAction({
             <ul className="mt-3 space-y-3">
               {offices.map((office) => (
                 <li key={office.id}>
-                  <span className="block font-mono text-[11px] uppercase tracking-[0.16em] text-brass">
-                    {office.kind}
-                  </span>
+                  <span className={officeLabel(office.kind)}>{office.kind}</span>
                   <span className="mt-1 flex flex-col items-start gap-1">
                     {office.phones.map((line) => (
                       <a
@@ -126,9 +135,7 @@ export default function CallToAction({
             <ul className="mt-3 space-y-3">
               {site.contact.whatsappByOffice.map((line) => (
                 <li key={line.href}>
-                  <span className="block font-mono text-[11px] uppercase tracking-[0.16em] text-brass">
-                    {line.label}
-                  </span>
+                  <span className={officeLabel(line.label)}>{line.label}</span>
                   <a
                     href={line.href}
                     target="_blank"
@@ -150,9 +157,7 @@ export default function CallToAction({
             <ul className="mt-3 space-y-3">
               {emailsByOffice.map((group) => (
                 <li key={group.label}>
-                  <span className="block font-mono text-[11px] uppercase tracking-[0.16em] text-brass">
-                    {group.label}
-                  </span>
+                  <span className={officeLabel(group.label)}>{group.label}</span>
                   <span className="mt-1 flex flex-col items-start gap-1">
                     {group.lines.map((line) => (
                       <a

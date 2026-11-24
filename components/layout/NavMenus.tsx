@@ -473,7 +473,14 @@ function BranchMenu({ onNavigate }: MenuProps) {
     >
       <div className="grid grid-cols-2 gap-2">
         {offices.map((o) => (
-          <div key={o.id} className="menu-anim card card-ink group flex items-start gap-4 p-4">
+          /* Same brass edge the Head Office carries on the Branch page, so
+             the one to try first is marked the same way wherever it appears. */
+          <div
+            key={o.id}
+            className={`menu-anim card card-ink group flex items-start gap-4 p-4 ${
+              o.id === "head-office" ? "card-feature" : ""
+            }`}
+          >
             <Tile>
               {o.id === "head-office" ? <Building2 className="h-4 w-4" strokeWidth={1.5} /> : <MapPin className="h-4 w-4" strokeWidth={1.5} />}
             </Tile>
