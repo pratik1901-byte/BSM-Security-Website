@@ -16,7 +16,13 @@ export default function Statement() {
       <div className="grid gap-16 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-4">
           <SectionLabel index="01">Who we are</SectionLabel>
-          <div className="mt-10 hidden lg:block" data-tilt="4">
+          {/* Shown on a phone too. It used to be `hidden lg:block`, so the
+              one photograph in this section simply was not there on the
+              device most people arrive on. The frame takes the photograph's
+              own ratio, which is landscape, and that is the right shape for
+              a full-width card on a phone — the tilt is pointer-driven and
+              stays out of the way on touch. */}
+          <div className="mt-8 lg:mt-10" data-tilt="4">
             <MediaFrame
               shot={media.briefing}
               figure="Fig. 02 / On post"

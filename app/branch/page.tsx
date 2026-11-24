@@ -95,7 +95,13 @@ export default function BranchPage() {
             <article
               key={office.id}
               data-stagger-item
-              className="card card-void card-still flex min-w-0 flex-col p-5 md:p-6 lg:p-[clamp(1.1rem,2.8svh,1.75rem)]"
+              /* The Head Office carries the brass edge the site already uses
+                 to mark the one card that leads a set — the same treatment
+                 as the advisory partner further down — rather than a border
+                 invented for this one place. */
+              className={`card card-void card-still flex min-w-0 flex-col p-5 md:p-6 lg:p-[clamp(1.1rem,2.8svh,1.75rem)] ${
+                office.id === "head-office" ? "card-feature" : ""
+              }`}
             >
               <div className="flex items-start gap-4">
                 <span className="icon-tile !h-12 !w-12 !rounded-2xl">
