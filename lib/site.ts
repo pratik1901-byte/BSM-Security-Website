@@ -144,7 +144,7 @@ export const services: Service[] = [
   {
     slug: "public-sector-government-defence-security",
     index: "01",
-    title: "PUBLIC SECTOR, GOVERNMENT & DEFENCE Ex-SECURITY SERVICES",
+    title: "PUBLIC SECTOR, GOVERNMENT & DEFENCE Ex-SERVICEMEN SECURITY SERVICES",
     points: [
       "Security services for Public Sector Undertakings (PSUs).",
       "Security for government departments and establishments.",
