@@ -14,7 +14,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/gallery",
   title: "Gallery — Personnel, Operations & Sites",
   description:
-    "Photographs of security personnel on post, shift briefings, patrol rounds and the corporate, residential, hospitality, industrial and event sites BSM Security Agency covers across Goa.",
+    "Photographs of BSM Security Agency: personnel on post at client sites across Goa, and the Head Office at Margao and Branch Office at Chimbel, Panjim.",
   keywords: ["security guards photos Goa", "security operations gallery"],
 });
 

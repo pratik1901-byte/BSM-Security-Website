@@ -26,7 +26,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/about",
   title: "About Us — Legacy, Leadership & Commitment",
   description:
-    "BSM Security Agency began as a DGR-sponsored security agency registered with the Directorate General Resettlement, Ministry of Defence, and now operates as an independent private agency led by Principal Partner Mr. Dattatray B. Naik, with Lt. Col. Bhupinder Singh Malhi (Retd.) guiding military-discipline training.",
+    "DGR-sponsored and registered with the Ministry of Defence. Led by Principal Partner Dattatray B. Naik, with training under a retired Lt. Col.",
   keywords: [
     "about BSM Security Agency",
     "Dattatray B Naik",

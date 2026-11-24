@@ -15,7 +15,7 @@ export const metadata: Metadata = pageMetadata({
   absoluteTitle: true,
   title: "BSM Security Agency, Goa — Security Guards & Security Services in Goa",
   description:
-    "BSM Security Agency, established in 2013 as a DGR-sponsored agency, provides trained security guards and managed security services across Goa — for PSUs, government and defence establishments, industry, banks, hotels, residential societies and events. Head Office in Margao, branch in Panjim. Available 24 × 7.",
+    "DGR-sponsored security agency in Goa since 2013. Trained guards for PSUs, defence, industry, banks, hotels, societies and events. Margao and Panjim.",
   keywords: [
     "security guard services Goa",
     "industrial security Goa",

@@ -23,7 +23,7 @@ export const site = {
   legalName: "BSM SECURITY AGENCY",
   tagline: "Protecting industries. Securing Businesses. Building Trust.",
   description:
-    "BSM is a professional security agency based in Goa, India, providing trained security personnel and managed protection services for corporate, residential, industrial, hospitality and event environments.",
+    "DGR-sponsored security agency in Goa since 2013. Trained guards and managed protection for industry, PSUs, banks, hotels, societies and events.",
   /**
    * The address the site is served from, and what every absolute URL is
    * built on: the canonical link, the sitemap, the structured data and the

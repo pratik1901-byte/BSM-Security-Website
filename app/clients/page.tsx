@@ -15,7 +15,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/clients",
   title: "Our Esteemed Clients — PSUs, Defence, Airports & Government",
   description:
-    "Organisations BSM Security Agency is engaged with across Goa, including HPCL, Goa Shipyard Limited, CSIR–NIO, Airports Authority of India, Indian Oil, BPCL, Goa International Airport, INS Hansa, ESIC and CONCOR — and what every client gets from a deployment.",
+    "Organisations BSM Security Agency serves across Goa, including HPCL, Goa Shipyard, CSIR-NIO, Airports Authority of India, Indian Oil, BPCL and INS Hansa.",
   keywords: [
     "security services for PSUs Goa",
     "airport security services Goa",

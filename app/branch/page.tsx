@@ -45,7 +45,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/branch",
   title: "Our Offices — Head Office Margao & Branch Office Panjim",
   description:
-    "BSM Security Agency offices in Goa: Head Office at Kurtarkar Classic, Aquem, Margao and Branch Office at Kadamba Govt Housing Society, Chimbel, Panjim — addresses, phone and WhatsApp numbers, email, maps and office leadership.",
+    "BSM Security Agency offices in Goa: Head Office at Aquem, Margao and Branch Office at Chimbel, Panjim. Addresses, numbers, email, maps and leadership.",
   keywords: [
     "security agency office Margao",
     "security agency Aquem Margao",

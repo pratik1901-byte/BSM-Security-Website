@@ -16,7 +16,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/contact",
   title: "Contact Us — Call, WhatsApp or Send an Enquiry",
   description:
-    "Contact BSM Security Agency in Goa: call +91 94212 49677, +91 87889 65649 or +91 87623 26038, WhatsApp, or email contact@bsmsecurityagency.com. Office hours Monday – Saturday, 9:00 AM – 5:30 PM; security services available 24 × 7.",
+    "Call +91 94212 49677, WhatsApp or email BSM Security Agency, Goa. Office hours Monday to Saturday, 9:00 AM to 5:30 PM. Security available 24 x 7.",
   keywords: [
     "contact security agency Goa",
     "hire security guards Goa",

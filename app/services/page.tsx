@@ -18,7 +18,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/services",
   title: "Security Services — Guards, Industrial, Banking, Event & Bouncer Services",
   description:
-    "Ten service categories from BSM Security Agency in Goa: public sector, government and defence security; industrial and corporate security; security guards; bouncer and personal security; access control and CCTV surveillance; banking and ATM security; residential and institutional security; wedding and event security; security training; and housekeeping.",
+    "Ten services from BSM Security Agency, Goa: guards, industrial, banking, bouncer and personal, access control, CCTV, event, training and housekeeping.",
   keywords: [
     "security guard services Goa",
     "bouncer services Goa",
