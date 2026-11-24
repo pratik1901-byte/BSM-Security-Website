@@ -398,7 +398,10 @@ function AboutMenu({ onNavigate }: MenuProps) {
             <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2} />
           </TransitionLink>
         </div>
-        <div className="space-y-2">
+        {/* Grows to the height of the portraits beside it and shares that
+            height between the three cards, rather than stacking them at the
+            top and leaving the column half empty. */}
+        <div className="flex flex-1 flex-col gap-2 [&>*]:flex-1">
           {sections.map((s) => (
             <LinkCard
               key={s.id}
@@ -521,7 +524,9 @@ function GalleryMenu({ onNavigate }: MenuProps) {
       cta="Full gallery"
       onNavigate={onNavigate}
     >
-      <div className="grid grid-cols-4 gap-2">
+      {/* One column per group, so the row ends where the panel does
+          instead of leaving a quarter of it empty. */}
+      <div className="grid grid-cols-3 gap-2">
         {galleryGroups.map((group) => {
           const items = gallery.filter((g) => g.group === group);
           const cover = items.find((g) => g.shot?.src)?.shot;

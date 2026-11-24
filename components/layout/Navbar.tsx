@@ -32,6 +32,24 @@ const isActive = (href: string, pathname: string) =>
  */
 export default function Navbar() {
   const pathname = usePathname();
+
+  /**
+   * What the bar says beside the mark on a phone or tablet.
+   *
+   * The agency's name on the home page, and the name of the section you are
+   * in on every other — taken from the same `site.nav` list the menu is
+   * built from, so a route added there is named here without a second list
+   * to keep in step. The longest match wins, which keeps a nested path such
+   * as /services/housekeeping under "Services" rather than falling through
+   * to the home label.
+   */
+  const hereLabel =
+    pathname === "/"
+      ? "BSM Security"
+      : (site.nav
+          .filter((item) => item.href !== "/" && pathname.startsWith(item.href))
+          .sort((a, b) => b.href.length - a.href.length)[0]?.label ?? "BSM Security");
+
   const [compact, setCompact] = useState(false);
   const [menu, setMenu] = useState<MenuKey | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -308,14 +326,29 @@ export default function Navbar() {
                   : "border border-transparent bg-transparent"
             }`}
           >
-            <TransitionLink href="/" aria-label="BSM — home" className="relative z-10 flex items-center">
+            <TransitionLink
+              href="/"
+              aria-label="BSM — home"
+              className="relative z-10 flex min-w-0 items-center gap-2.5"
+            >
               <Logo
                 size={96}
                 priority
-                imgClassName={`transition-[width] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:opacity-90 ${
+                imgClassName={`shrink-0 transition-[width] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:opacity-90 ${
                   compact ? "w-11 md:w-[3.25rem]" : "w-14 md:w-[4.5rem]"
                 }`}
               />
+              {/* Where you are, beside the mark — the agency's name on the
+                  home page, the section's name everywhere else. Only up to
+                  the desktop breakpoint, where the full nav already says it.
+                  `aria-hidden` because the link is already labelled and the
+                  heading of each page names it again. */}
+              <span
+                aria-hidden="true"
+                className="min-w-0 truncate font-display text-[15px] font-semibold tracking-[-0.01em] text-bone xl:hidden"
+              >
+                {hereLabel}
+              </span>
             </TransitionLink>
 
             {/* Desktop items */}
