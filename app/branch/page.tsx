@@ -58,7 +58,7 @@ export const metadata: Metadata = pageMetadata({
 /** One photograph per office. Shown only once BSM supplies it. */
 const officeShots = {
   "head-office": media.headOffice,
-  "branch-office-goa": media.branchOfficeCabin,
+  "branch-office-goa": media.branchOfficeExterior,
 } as const;
 
 /** Turn-by-turn directions to an address, in Google Maps. */
@@ -270,6 +270,16 @@ function ContactRow({
 
 function OfficeBlock({ office, tinted }: { office: Office; tinted: boolean }) {
   const shot = officeShots[office.id as keyof typeof officeShots];
+  /* How the photograph and the map share the row. A photograph sets the
+     height of the band, so the split follows its shape: a tall one takes a
+     third and leaves the map wide, a wide one takes half, which stops the
+     band collapsing to a 315px letterbox the way an evenly-split 16:9 did. */
+  const tall = (() => {
+    const [w, h] = (shot?.ratio ?? "16 / 10").split("/").map((n) => Number.parseFloat(n));
+    return w / h < 1;
+  })();
+  const photoSpan = tall ? "lg:col-span-4" : "lg:col-span-6";
+  const mapSpan = tall ? "lg:col-span-8" : "lg:col-span-6";
   const surface = tinted ? "card-void" : "card-ink";
   const primaryPhone = office.phones[0];
   const primaryWhatsApp = office.whatsapps[0];
@@ -324,22 +334,56 @@ function OfficeBlock({ office, tinted }: { office: Office; tinted: boolean }) {
         </div>
       </div>
 
-      {/* ---- Contact details beside a large, readable map ---------------- */}
-      <div className="mt-12 grid gap-5 lg:grid-cols-12">
-        <div className="flex min-w-0 flex-col gap-5 lg:col-span-5" data-reveal="up">
-          {shot.src && (
+      {/* ---- The office: the photograph and the map, one aligned band -----
+          The map used to sit beside a column holding the photograph *and*
+          every contact row, and it was told to match that column's height.
+          On a 1920-wide desktop — a 1440 screen at 75% — that made it a
+          1001×1045 slab, taller than the screen it had to fit in.
+
+          Now the two share a row of their own. The photograph's 3:4 frame
+          sets the height and the map follows it, so the pair always line up
+          top and bottom and the map stays well inside the viewport: 561px
+          tall at 1440, 753px at 1920. The details get their own block
+          underneath, which is also where they are easiest to read. */}
+      <div className="mt-12 grid items-stretch gap-5 lg:grid-cols-12">
+        {shot.src && (
+          <div className={`min-w-0 ${photoSpan}`} data-reveal="up">
             <MediaFrame
               shot={shot}
-              /* Each office photograph keeps its own shape. Forcing one ratio
-                 on both cropped the Branch Office frame — a tall photograph —
-                 straight through the desk it was taken for. */
+              /* Each office photograph keeps its own shape: a shot that
+                 declares a ratio is framed to it and shown whole. */
               ratio={shot.ratio ?? "16 / 10"}
               parallax={0}
-              sizes="(max-width: 1024px) 100vw, 40vw"
+              sizes="(max-width: 1024px) 100vw, 33vw"
             />
-          )}
+          </div>
+        )}
 
-          <div className={`card card-still ${surface} divide-y divide-white/[0.06] p-2.5`}>
+        <div
+          className={`min-w-0 ${shot.src ? mapSpan : "lg:col-span-12"}`}
+          data-reveal="fade"
+        >
+          <MapEmbed
+            src={office.mapEmbed}
+            title={office.mapTitle}
+            address={office.address}
+            directionsHref={directions(office.address)}
+            openHref={office.mapLink}
+            /* Matches the photograph beside it on a desktop; on a phone,
+               where they stack, a height that leaves the page scrollable. */
+            className="h-[20rem] sm:h-[24rem] lg:h-full"
+          />
+        </div>
+      </div>
+
+      {/* ---- The details, on their own ------------------------------------ */}
+      <div className="mt-5" data-reveal="up">
+        {/* Address, numbers and email read better across the page than
+            stacked in a narrow column, and a row of equal cells is what
+            squares this block up with the band above it. */}
+        <div
+          className={`card card-still ${surface} grid gap-x-4 gap-y-1 p-2.5 sm:grid-cols-2 xl:grid-cols-3`}
+        >
             <ContactRow
               href={directions(office.address)}
               external
@@ -388,18 +432,6 @@ function OfficeBlock({ office, tinted }: { office: Office; tinted: boolean }) {
             >
               {office.email.display}
             </ContactRow>
-          </div>
-        </div>
-
-        <div className="min-w-0 lg:col-span-7" data-reveal="fade">
-          <MapEmbed
-            src={office.mapEmbed}
-            title={office.mapTitle}
-            address={office.address}
-            directionsHref={directions(office.address)}
-            openHref={office.mapLink}
-            className="h-[26rem] lg:h-full lg:min-h-[32rem]"
-          />
         </div>
       </div>
 

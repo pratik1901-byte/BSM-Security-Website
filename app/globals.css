@@ -857,52 +857,15 @@ figure img {
 /* --------------------------------------------------------------------------
    The pointer
 
-   A brass arrow in place of the system one, so the pointer belongs to the
-   site rather than to the operating system. It is a real CSS cursor, not a
-   dot chasing the mouse on every frame: it cannot lag behind, it survives a
-   dropped frame, and it keeps working where script does not run.
+   The site used to draw its own: a brass arrow, a ring over anything
+   clickable, a bar over text. It is gone — the pointer is the system's
+   again, which is the one people's own settings, cursor size and
+   accessibility tools apply to, and the one that behaves correctly over an
+   embedded map, a scrollbar and a native control.
 
-   Three states, matching what the pointer is over — the arrow, a ring over
-   anything clickable, and a bar over text you can type into. Each is drawn
-   dark-edged so it stays visible against both the near-black page and the
-   white logo plates.
-
-   Only for a real pointer. A touch screen has none, and a coarse pointer
-   that reports hover would otherwise be given a cursor nobody can see.
+   Nothing replaces it here on purpose. `cursor: pointer` on a link or a
+   button still does its ordinary job through Tailwind.
    -------------------------------------------------------------------------- */
-@media (hover: hover) and (pointer: fine) {
-  html,
-  body,
-  *,
-  *::before,
-  *::after {
-    cursor: url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='28'%20height='28'%20viewBox='0%200%2028%2028'><path%20d='M6%203.2%206%2022.4%2011.1%2017.4%2014.3%2023.8%2017.8%2022.1%2014.6%2015.8%2021.2%2015.4Z'%20fill='%23c8a45c'%20stroke='%2304060a'%20stroke-width='1.6'%20stroke-linejoin='round'/></svg>") 6 3, default;
-  }
-
-  a,
-  button,
-  summary,
-  label[for],
-  select,
-  [role="button"],
-  [role="menuitem"],
-  [onclick],
-  .cursor-pointer {
-    cursor: url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='26'%20height='26'%20viewBox='0%200%2026%2026'><circle%20cx='13'%20cy='13'%20r='7.5'%20fill='rgba(4,6,10,0.35)'%20stroke='%23c8a45c'%20stroke-width='2'/><circle%20cx='13'%20cy='13'%20r='2.2'%20fill='%23c8a45c'/></svg>") 13 13, pointer;
-  }
-
-  input:not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
-  textarea,
-  [contenteditable="true"] {
-    cursor: url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='18'%20height='26'%20viewBox='0%200%2018%2026'><path%20d='M5%203h8M5%2023h8M9%203v20'%20fill='none'%20stroke='%23c8a45c'%20stroke-width='2'%20stroke-linecap='round'/></svg>") 9 13, text;
-  }
-
-  /* Disabled controls still say so. */
-  button:disabled,
-  [aria-disabled="true"] {
-    cursor: url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='28'%20height='28'%20viewBox='0%200%2028%2028'><path%20d='M6%203.2%206%2022.4%2011.1%2017.4%2014.3%2023.8%2017.8%2022.1%2014.6%2015.8%2021.2%2015.4Z'%20fill='%23c8a45c'%20stroke='%2304060a'%20stroke-width='1.6'%20stroke-linejoin='round'/></svg>") 6 3, not-allowed;
-  }
-}
 
 /* --------------------------------------------------------------------------
    The entrance

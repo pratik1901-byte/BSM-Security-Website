@@ -366,6 +366,13 @@ export const media = {
      All four cropped 3:4 from the bottom. The frames run a long way up the
      panelling, so an uncropped one puts the desk in the last quarter and
      three metres of empty wall above it. */
+  branchOfficeExterior: {
+    src: "/media/offices/branch-office-exterior.webp",
+    alt: "The Branch Office from the road: BSM Security Agency's board on the wall beside the gate, giving the branch and head office addresses",
+    label: "Branch Office — Chimbel, Panjim",
+    brief: "Supplied by BSM. Kadamba Govt Housing Society, Chimbel, Panjim. Trimmed to 3:4 from a tall frame, keeping the board and the frontage.",
+    ratio: "3 / 4",
+  },
   branchOfficeCabin: {
     src: "/media/offices/branch-office-cabin.webp",
     alt: "Two members of the Branch Office team at the desk in the cabin, facing the camera",
