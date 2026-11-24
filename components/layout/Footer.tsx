@@ -97,11 +97,14 @@ export default function Footer() {
                 <span className="flex min-w-0 flex-col gap-3">
                   {offices.map((office) => (
                     <span key={office.id} className="flex min-w-0 flex-col gap-1">
-                      {/* Head Office underlined — the one to try first. */}
+                      {/* The Head Office in an outlined chip — the one to
+                          try first. `self-start` keeps the keyline around
+                          the words; a flex column would otherwise stretch
+                          it the full width of the card. */}
                       <span
                         className={`font-mono text-[10px] uppercase tracking-[0.18em] text-brass${
                           office.id === "head-office"
-                            ? " underline decoration-brass/50 decoration-1 underline-offset-[5px]"
+                            ? " flex w-fit self-start items-center rounded-md border border-brass/55 px-2 py-1"
                             : ""
                         }`}
                       >
@@ -126,7 +129,7 @@ export default function Footer() {
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brass" strokeWidth={1.5} />
                 <span className="flex min-w-0 flex-col gap-3">
                   <span className="flex min-w-0 flex-col gap-1">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-brass underline decoration-brass/50 decoration-1 underline-offset-[5px]">
+                    <span className="flex w-fit items-center self-start rounded-md border border-brass/55 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-brass">
                       {offices[0].kind}
                     </span>
                     <a href={offices[0].email.href} className="break-all text-mist hover:text-bone">

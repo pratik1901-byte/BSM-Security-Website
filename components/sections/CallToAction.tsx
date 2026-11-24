@@ -6,14 +6,19 @@ import { RequestSecurityButton } from "@/components/ui/RequestSecurityButton";
 
 /**
  * The office a number or address belongs to, as the small brass line above
- * it. The Head Office is underlined — it is the one to try first, and an
- * underline says so without adding another colour or weight to a card that
- * already has three sizes of type in it.
+ * it. The Head Office sits in an outlined chip — a brass keyline, nothing
+ * filled in behind it — so the one to try first is marked without adding
+ * another block of colour to a card that already has three sizes of type.
+ *
+ * `w-fit` is what keeps the keyline around the words rather than drawn
+ * across the whole column.
  */
+const OFFICE_LABEL = "font-mono text-[11px] uppercase tracking-[0.16em] text-brass";
+
 const officeLabel = (label: string) =>
-  `block font-mono text-[11px] uppercase tracking-[0.16em] text-brass${
-    label === offices[0].kind ? " underline decoration-brass/50 decoration-1 underline-offset-[5px]" : ""
-  }`;
+  label === offices[0].kind
+    ? `flex w-fit items-center rounded-md border border-brass/55 px-2 py-1 ${OFFICE_LABEL}`
+    : `block ${OFFICE_LABEL}`;
 
 /** Email addresses by office, in the order the footer lists them. */
 const emailsByOffice = [
