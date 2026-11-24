@@ -16,7 +16,7 @@ import {
   UserRound,
   Users,
 } from "lucide-react";
-import { services, site, offices, clients } from "@/lib/site";
+import { services, site, offices } from "@/lib/site";
 import { leaders, legacy } from "@/lib/about";
 import { gallery, galleryGroups, groupId, serviceShots, media } from "@/lib/media";
 import { titleCase, type MenuKey } from "@/lib/navigation";
@@ -25,17 +25,6 @@ import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { RequestSecurityTrigger } from "@/components/ui/RequestSecurityButton";
 
 type MenuProps = { onNavigate: () => void };
-
-/** Lets a long address wrap before the "@" instead of mid-word. */
-const wrapAt = (email: string) => {
-  const [user, domain] = email.split("@");
-  return (
-    <>
-      {user}
-      <wbr />@{domain}
-    </>
-  );
-};
 
 /**
  * The contents of each navbar dropdown. Every menu is laid out as a short,
@@ -211,7 +200,7 @@ function ServicesMenu({ onNavigate }: MenuProps) {
 /** Clients: shortcuts into the page only — the roster itself lives there. */
 function ClientsMenu({ onNavigate }: MenuProps) {
   const sections = [
-    { id: "roster", label: "Our Esteemed Clients", note: `${clients.length} organisations, with their locations as supplied.`, icon: Landmark },
+    { id: "roster", label: "Our Esteemed Clients", note: "Organisations, with their locations as supplied.", icon: Landmark },
     { id: "get-in-touch", label: "Become a client", note: "Start with a site survey and a written plan.", icon: ShieldCheck },
   ];
   return (
@@ -286,7 +275,12 @@ function ContactMenu({ onNavigate }: MenuProps) {
       cta="Contact page"
       onNavigate={onNavigate}
     >
-      <div className="grid grid-cols-4 gap-2">
+      {/* The Email card takes the wider share. Four equal columns gave it
+          195px to work with, and the Head Office address is the longest
+          string in the menu — there was no font size that both read well
+          and fitted on one line. The other three hold short lines (a phone
+          number, a label, a button) and lose nothing by being narrower. */}
+      <div className="grid grid-cols-[1fr_1fr_1.32fr_1fr] gap-2">
         <div className="menu-anim card card-ink card-still p-4">
           <div className="flex items-center gap-2.5">
             <Tile>
@@ -331,11 +325,21 @@ function ContactMenu({ onNavigate }: MenuProps) {
             </Tile>
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-dim">Email</p>
           </div>
-          <a href={site.contact.emailHref} className="link-wipe mt-3 inline-block text-[13px] font-semibold text-bone hover:text-brass">
-            {wrapAt(site.contact.email)}
+          {/* The Head Office address first and bolder — the one to lead
+              with — then the general inbox underneath it, lighter.
+
+              Measured, not guessed, and fluid because the column is: the
+              card holds 209px at 1280 (the narrowest width this menu opens
+              at) and 246px at 1440, while the Head Office address — the
+              longest string in the menu — needs about 17px of width per
+              point of type. A fixed size that reads well at 1440 wraps at
+              1280, so the size tracks the viewport between 11px and 14px
+              and keeps roughly a tenth of the card as margin throughout. */}
+          <a href={head.email.href} className="link-wipe mt-3 inline-block whitespace-nowrap text-[clamp(11px,calc(1.21vw_-_4.41px),14px)] font-semibold text-bone hover:text-brass">
+            {head.email.display}
           </a>
-          <a href={head.email.href} className="link-wipe mt-1.5 inline-block text-[12px] text-mist hover:text-brass">
-            {wrapAt(head.email.display)}
+          <a href={site.contact.emailHref} className="link-wipe mt-1.5 inline-block whitespace-nowrap text-[clamp(10px,calc(1.21vw_-_5.41px),13px)] text-mist hover:text-brass">
+            {site.contact.email}
           </a>
         </div>
 

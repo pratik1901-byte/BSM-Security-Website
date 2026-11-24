@@ -34,22 +34,35 @@ export default function Statement() {
         </div>
 
         <div className="lg:col-span-8">
-          <h2 data-scrub-words className="text-display font-semibold text-bone">
-            BSM is a security agency built around one idea: security is a{" "}
-            <span className="accent-serif text-brass">discipline</span>, not a headcount.
+          {/* Set as two lines rather than left to wrap. Allowed to find its
+              own break it read "…Driven by / Excellence." at every width —
+              the last word stranded on a line of its own. Breaking at the
+              comma gives two clauses of nearly equal length instead, and
+              `text-balance` keeps each one tidy if a narrow screen has to
+              wrap inside a clause. */}
+          <h2 data-scrub-words className="text-display font-semibold text-bone text-balance">
+            <span className="block">
+              Committed to <span className="accent-serif text-brass">Safety</span>,
+            </span>
+            <span className="block">Driven by Excellence.</span>
           </h2>
 
           <div className="mt-12 grid gap-10 md:grid-cols-2">
             <p data-reveal="up" className="text-lead text-justify text-mist">
-              Goa is a state of extremes — a beachfront property in peak season and the same
-              property in monsoon are two different security problems. A gated community, an
-              industrial estate and a hotel lobby each demand different judgement from the person
-              standing at the door.
+              At BSM Security Agency, we believe that good security begins with the right people,
+              proper planning and responsible management. We understand that every client and
+              property has different security needs. That is why we take the time to understand
+              each site and provide security arrangements suited to its requirements. We serve
+              residential communities, commercial establishments, hotels, industries and other
+              organisations.
             </p>
             <p data-reveal="up" data-delay="0.08" className="text-lead text-justify text-mist">
-              We plan for that difference before anyone is deployed: a site survey, a written
-              deployment plan, personnel matched to the environment, and supervision that verifies
-              the plan is actually being followed at three in the morning.
+              Our responsibility goes beyond providing security personnel. We focus on proper
+              training, clear duties, regular supervision and professional conduct. We believe in
+              being accountable for our work, maintaining consistent service standards and
+              building long-term relationships with our clients. At BSM, we don&rsquo;t just
+              provide services; we build confidence, create safer environments and deliver peace
+              of mind.
             </p>
           </div>
 

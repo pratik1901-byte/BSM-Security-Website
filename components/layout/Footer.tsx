@@ -151,24 +151,20 @@ export default function Footer() {
               </li>
               <li className="card card-void card-still flex gap-3 rounded-2xl p-4">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brass" strokeWidth={1.5} />
-                <span>
+                <span className="flex min-w-0 flex-col gap-2">
+                  {/* Head Office only — this is its address, so the Branch
+                      Office link that used to sit below it pointed at an
+                      address that wasn't the one shown. Same outlined chip
+                      as the office labels above, for one consistent mark. */}
+                  <span className="flex w-fit items-center self-start rounded-md border border-brass/55 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-brass">
+                    Head Office
+                  </span>
                   <address className="not-italic text-mist">
                     <Copy text={site.contact.address.street} />
                     <br />
                     <Copy text={site.contact.address.locality} />, Goa,{" "}
                     <Copy text={site.contact.address.postalCode} />
                   </address>
-                  <span className="mt-3 flex flex-wrap gap-x-4 gap-y-1">
-                    {offices.map((office) => (
-                      <TransitionLink
-                        key={office.id}
-                        href={`/branch#${office.id}`}
-                        className="link-wipe font-mono text-[10px] uppercase tracking-[0.16em] text-brass"
-                      >
-                        {office.kind}
-                      </TransitionLink>
-                    ))}
-                  </span>
                 </span>
               </li>
             </ul>
