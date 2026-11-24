@@ -57,7 +57,7 @@ export const metadata: Metadata = pageMetadata({
 
 /** One photograph per office. Shown only once BSM supplies it. */
 const officeShots = {
-  "head-office": media.headOffice,
+  "head-office": media.headOfficeExterior,
   "branch-office-goa": media.branchOfficeExterior,
 } as const;
 
@@ -270,16 +270,11 @@ function ContactRow({
 
 function OfficeBlock({ office, tinted }: { office: Office; tinted: boolean }) {
   const shot = officeShots[office.id as keyof typeof officeShots];
-  /* How the photograph and the map share the row. A photograph sets the
-     height of the band, so the split follows its shape: a tall one takes a
-     third and leaves the map wide, a wide one takes half, which stops the
-     band collapsing to a 315px letterbox the way an evenly-split 16:9 did. */
-  const tall = (() => {
-    const [w, h] = (shot?.ratio ?? "16 / 10").split("/").map((n) => Number.parseFloat(n));
-    return w / h < 1;
-  })();
-  const photoSpan = tall ? "lg:col-span-4" : "lg:col-span-6";
-  const mapSpan = tall ? "lg:col-span-8" : "lg:col-span-6";
+  /* The band both the photograph and the map sit in. Capping its height
+     is what keeps the map on the screen, and letting the photograph take
+     that height and derive its own width is what shows a tall photograph
+     whole without it running down the page. */
+  const band = "lg:h-[clamp(20rem,54svh,34rem)]";
   const surface = tinted ? "card-void" : "card-ink";
   const primaryPhone = office.phones[0];
   const primaryWhatsApp = office.whatsapps[0];
@@ -345,24 +340,25 @@ function OfficeBlock({ office, tinted }: { office: Office; tinted: boolean }) {
           top and bottom and the map stays well inside the viewport: 561px
           tall at 1440, 753px at 1920. The details get their own block
           underneath, which is also where they are easiest to read. */}
-      <div className="mt-12 grid items-stretch gap-5 lg:grid-cols-12">
+      <div className={`mt-12 flex flex-col gap-5 lg:flex-row lg:items-stretch ${band}`}>
         {shot.src && (
-          <div className={`min-w-0 ${photoSpan}`} data-reveal="up">
+          <div className="min-w-0 lg:h-full lg:shrink-0" data-reveal="up">
             <MediaFrame
               shot={shot}
-              /* Each office photograph keeps its own shape: a shot that
-                 declares a ratio is framed to it and shown whole. */
+              /* Framed to the photograph's own ratio and shown whole, never
+                 cropped. `fillHeight` makes the height the fixed side, so a
+                 9:16 frontage comes out narrow beside the map instead of
+                 seven hundred pixels tall. */
               ratio={shot.ratio ?? "16 / 10"}
+              fillHeight
+              className="lg:h-full"
               parallax={0}
-              sizes="(max-width: 1024px) 100vw, 33vw"
+              sizes="(max-width: 1024px) 100vw, 28vw"
             />
           </div>
         )}
 
-        <div
-          className={`min-w-0 ${shot.src ? mapSpan : "lg:col-span-12"}`}
-          data-reveal="fade"
-        >
+        <div className="min-w-0 lg:h-full lg:flex-1" data-reveal="fade">
           <MapEmbed
             src={office.mapEmbed}
             title={office.mapTitle}

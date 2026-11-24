@@ -47,9 +47,10 @@ export const media = {
   },
   briefing: {
     src: "/media/photos/briefing-team.webp",
-    alt: "Group of people silhouetted against the windows of an empty building interior",
-    label: "Shift briefing before deployment",
-    brief: "Supervisor briefing a team at handover.",
+    alt: "BSM officers on watch across an open floor, silhouetted against a wall of windows at first light",
+    label: "On watch at first light",
+    brief: "Officers holding an open floor against the windows at dawn.",
+    ratio: "1448 / 1086",
   },
   patrol: {
     src: "/media/photos/patrol-light-shadow.webp",
@@ -366,12 +367,19 @@ export const media = {
      All four cropped 3:4 from the bottom. The frames run a long way up the
      panelling, so an uncropped one puts the desk in the last quarter and
      three metres of empty wall above it. */
+  headOfficeExterior: {
+    src: "/media/offices/head-office-exterior.webp",
+    alt: "The Head Office frontage: the B.S.M. Security Services board above the shopfront, giving the DGR empanelment number",
+    label: "Head Office — Aquem, Margao",
+    brief: "Supplied by BSM. Aquem, Margao. Shown whole at the frame it was taken in.",
+    ratio: "1297 / 1212",
+  },
   branchOfficeExterior: {
     src: "/media/offices/branch-office-exterior.webp",
     alt: "The Branch Office from the road: BSM Security Agency's board on the wall beside the gate, giving the branch and head office addresses",
     label: "Branch Office — Chimbel, Panjim",
-    brief: "Supplied by BSM. Kadamba Govt Housing Society, Chimbel, Panjim. Trimmed to 3:4 from a tall frame, keeping the board and the frontage.",
-    ratio: "3 / 4",
+    brief: "Supplied by BSM. Kadamba Govt Housing Society, Chimbel, Panjim. The frame as it was taken — uncropped.",
+    ratio: "720 / 1280",
   },
   branchOfficeCabin: {
     src: "/media/offices/branch-office-cabin.webp",

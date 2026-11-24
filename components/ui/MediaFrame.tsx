@@ -26,6 +26,16 @@ type MediaFrameProps = {
    * the thing the group is named after, so the caption only repeated it.
    */
   captionLabel?: boolean;
+  /**
+   * Size the frame by its height instead of its width, from `lg` up.
+   *
+   * A frame normally fills the column and takes whatever height its ratio
+   * gives it, which for a 9:16 photograph in a wide column is most of the
+   * screen. With this set the frame takes the height of whatever box it is
+   * in and works out its own width from the ratio, so a tall photograph
+   * comes out narrow rather than long — still whole, still uncropped.
+   */
+  fillHeight?: boolean;
 };
 
 /**
@@ -58,6 +68,7 @@ export function MediaFrame({
   sizes = "(max-width: 768px) 100vw, 50vw",
   chip = false,
   captionLabel = true,
+  fillHeight = false,
 }: MediaFrameProps) {
   const src = srcProp ?? shot?.src;
   const alt = altProp ?? shot?.alt;
@@ -71,7 +82,11 @@ export function MediaFrame({
 
   return (
     <figure className={`group relative ${className}`} data-parallax-scope>
-      <div data-clip className="frame w-full" style={{ aspectRatio: frameRatio }}>
+      <div
+        data-clip
+        className={`frame w-full ${fillHeight ? "lg:h-full lg:w-auto" : ""}`}
+        style={{ aspectRatio: frameRatio }}
+      >
         {src ? (
           <div
             className={drifts ? "absolute inset-[-10%]" : "absolute inset-0"}
