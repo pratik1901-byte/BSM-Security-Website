@@ -45,9 +45,14 @@ export default function GalleryPage() {
       >
         {/* One cover card per group — three columns for three groups, so the
             row ends where the page does instead of leaving a gap on the
-            right. Two across on a phone, the last card spanning both. */}
+            right. Two across from a tablet up, the last card spanning both.
+
+            One across on a phone. Two across there gave an odd group a row
+            of two small cards and then a full-width one twice their size,
+            which read as a mistake rather than a layout: three covers of
+            one shape, stacked, is the same idea the desktop row states. */}
         <div
-          className="mt-10 grid grid-cols-2 gap-4 lg:mt-[clamp(1.5rem,4.5svh,3.25rem)] lg:grid-cols-3"
+          className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-[clamp(1.5rem,4.5svh,3.25rem)] lg:grid-cols-3"
           data-stagger
         >
           {galleryGroups.map((group, i) => {
@@ -58,9 +63,14 @@ export default function GalleryPage() {
                 key={group}
                 href={`#${groupId(group)}`}
                 data-stagger-item
-                className={`card card-void group relative block aspect-[4/3] p-0 lg:aspect-auto lg:h-[clamp(9rem,26svh,17rem)] ${
+                /* 16:10 on a phone, where the card is the full width of the
+                   page: close to the shape of the desktop card, and close
+                   enough to the covers themselves that little is cropped.
+                   The span only applies once there are two columns to
+                   span. */
+                className={`card card-void group relative block aspect-[16/10] p-0 sm:aspect-[4/3] lg:aspect-auto lg:h-[clamp(9rem,26svh,17rem)] ${
                   i === galleryGroups.length - 1 && galleryGroups.length % 2 === 1
-                    ? "col-span-2 lg:col-span-1"
+                    ? "sm:col-span-2 lg:col-span-1"
                     : ""
                 }`}
               >
