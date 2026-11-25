@@ -59,8 +59,14 @@ export default function Navbar() {
    *
    * Shown once a session and then never again, because a hint that keeps
    * reappearing stops being a hint. It waits for the entrance to finish
-   * before appearing, retires the moment the menu is opened, and retires on
-   * its own after a few seconds if it is ignored.
+   * before appearing, and then stays: opening the menu is the one thing
+   * that retires it.
+   *
+   * It used to withdraw on a timer after a few seconds. On a phone that
+   * meant a visitor who was reading the page, rather than watching the top
+   * of it, missed the nudge entirely — and the menu button is the only way
+   * into the site there, so the nudge is worth keeping on screen until it
+   * has been answered.
    */
   const [menuHint, setMenuHint] = useState(false);
 
@@ -84,13 +90,6 @@ export default function Navbar() {
     const show = window.setTimeout(() => setMenuHint(true), 2600);
     return () => window.clearTimeout(show);
   }, []);
-
-  useEffect(() => {
-    if (!menuHint) return;
-    const hide = window.setTimeout(retireHint, 7000);
-    return () => window.clearTimeout(hide);
-  }, [menuHint, retireHint]);
-
 
   const listRef = useRef<HTMLUListElement>(null);
   const pillRef = useRef<HTMLSpanElement>(null);
