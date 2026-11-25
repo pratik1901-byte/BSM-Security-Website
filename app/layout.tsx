@@ -53,6 +53,16 @@ export const metadata: Metadata = {
   creator: brand.name,
   publisher: brand.name,
   alternates: { canonical: "/" },
+  /**
+   * Ownership proofs for Google Search Console and Bing Webmaster Tools.
+   * Declared here rather than as hand-written <meta> tags in the head so
+   * Next renders them once, in the right place, and cannot emit a second
+   * copy on a page that sets its own metadata.
+   */
+  verification: {
+    google: "ylvVsygB8uscnv5axLkjEbkqQj4U280Naty1gyfPjuo",
+    other: { "msvalidate.01": "05250EC43B5741B80C5050D5A67A0428" },
+  },
   openGraph: {
     type: "website",
     locale: site.locale,

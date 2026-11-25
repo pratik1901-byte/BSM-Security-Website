@@ -15,7 +15,7 @@ const getSiteUrl = () => {
     const host = process.env.VERCEL_PROJECT_PRODUCTION_URL.replace(/\/$/, "");
     return host.startsWith("http") ? host : `https://${host}`;
   }
-  return "https://bsmsecurityagency.vercel.app";
+  return "https://www.bsmsecurityagency.com";
 };
 
 export const site = {
@@ -29,9 +29,15 @@ export const site = {
    * built on: the canonical link, the sitemap, the structured data and the
    * share cards.
    *
-   * Defaults to https://bsmsecurityagency.vercel.app. When bsmsecurityagency.com
-   * is connected and assigned in Vercel, it can be set via NEXT_PUBLIC_SITE_URL
-   * or automatically picked up via VERCEL_PROJECT_PRODUCTION_URL.
+   * It has to be an address that answers, because the share cards are
+   * absolute URLs built on it: while this said bsmsecurityagency.vercel.app
+   * — which now returns 404 — every WhatsApp and social preview pointed at
+   * a dead image and showed nothing.
+   *
+   * The live site is www.bsmsecurityagency.com (the apex redirects to it),
+   * so that is the default rather than something a deploy has to remember
+   * to override. NEXT_PUBLIC_SITE_URL still wins if it is set, which is
+   * what a preview deployment uses.
    */
   url: getSiteUrl(),
   locale: "en_IN",

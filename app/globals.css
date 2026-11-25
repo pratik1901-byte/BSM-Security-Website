@@ -362,6 +362,27 @@
   transform: translate3d(0, 1rem, 0) scale(0.94);
 }
 
+/* The entrance screen's own contents, which were the one set of animated
+   elements without a resting state here.
+
+   They are in the server's HTML, so they painted in full — logo, wordmark,
+   and the meter already drawn end to end — and then sat there until React
+   hydrated. The timeline's first instruction is `fromTo(..., {opacity: 0,
+   y: 16})`, so the moment it ran it snapped all of that back to invisible
+   and played it in. That blink, on the cover, before anything else, is the
+   jitter: the page was not stuttering, it was showing a frame it should
+   never have shown.
+
+   Matching the timeline's own starting values means the first painted frame
+   is already the first frame of the animation. */
+.anim-ready .intro-mark {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+}
+.anim-ready .intro-meter-fill {
+  transform: scaleX(0);
+}
+
 /* SplitText writes these wrappers; the mask is what the lines rise out of.
    The mask clips to the line box, and the display face is set on a tight
    line-height — without this the descenders (g, y, p) are cut off. */
