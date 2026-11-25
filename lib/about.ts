@@ -60,13 +60,10 @@ export const leaders: LeaderProfile[] = [
     ],
     marks: [
       "Mr. Dattatray B. Naik has been associated with security operations and agency management since 1996.",
-      // Three runs rather than one, so the sentence about consultancy work
-      // marks its own agencies. "BSM Security Agency" is deliberately not a
-      // mark on its own: it appears again in the closing paragraph, which
-      // should stay unmarked.
-      "D.B Security Consultation Agency and Outsource Services",
-      "BSM Security Agency and Hansa Security Agency",
-      "CNP Security Agency, TA Security Agency, AG Security Agency and AC Security Agency",
+      // Both sentences entire, not the agency names alone, so the account of
+      // what he founded and whom he has advised reads as one marked block.
+      // It stops before "His professional journey", which stays plain.
+      "Throughout his career, he has been actively involved in the establishment, management and operations of D.B Security Consultation Agency and Outsource Services, alongside BSM Security Agency and Hansa Security Agency. He has also provided professional consultancy services to several security agencies, including CNP Security Agency, TA Security Agency, AG Security Agency and AC Security Agency.",
     ],
   },
   {
