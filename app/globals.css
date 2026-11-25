@@ -763,6 +763,18 @@ figure img {
   color: var(--color-void);
   border-color: var(--color-brass);
 }
+/* A WhatsApp button fills with WhatsApp's own green instead of the site's
+   brass — the same #25d366 the bar at the top already uses, so the action
+   looks like itself wherever it appears. Declared after .btn-outline
+   because the two have equal specificity and the later one wins. */
+.btn-whatsapp .btn-fill {
+  background: #25d366;
+}
+.btn-whatsapp:hover,
+.btn-whatsapp:focus-visible {
+  color: var(--color-void);
+  border-color: #25d366;
+}
 .btn-quiet {
   color: var(--color-mist);
 }
@@ -869,6 +881,38 @@ figure img {
    SmoothScroll.tsx, which applies the navbar + sub-nav clearance itself. No
    scroll-margin here: Lenis honours it too, and the clearance would count
    twice, landing every section one bar-height short. */
+}
+
+/* --------------------------------------------------------------------------
+   Native form controls
+
+   A select's open list is drawn by the browser and the operating system, not
+   by the page, so the classes on <option> never reach it: against the black
+   enquiry panel it came up as a white list with a blue highlight.
+
+   `color-scheme` is the one property that list does read. It tells the
+   browser which way round to draw its own furniture — the popup, the
+   scrollbar inside it, the focus ring, the caret in a text field — so the
+   whole control follows the site instead of fighting it. The option colours
+   below then take effect wherever a browser also honours those.
+   -------------------------------------------------------------------------- */
+input,
+select,
+textarea {
+  color-scheme: dark;
+  accent-color: var(--color-brass);
+}
+
+select option {
+  background-color: var(--color-void);
+  color: var(--color-bone);
+}
+
+/* The row under the pointer, and the one already chosen. */
+select option:hover,
+select option:checked {
+  background-color: rgba(var(--brass-rgb), 0.22);
+  color: var(--color-bone);
 }
 
 /* --------------------------------------------------------------------------

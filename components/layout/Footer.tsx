@@ -50,7 +50,7 @@ export default function Footer() {
                 href={site.contact.whatsappHref}
                 target="_blank"
                 rel="noreferrer"
-                className="btn btn-outline !py-3.5"
+                className="btn btn-outline btn-whatsapp !py-3.5"
               >
                 <span className="btn-fill" aria-hidden="true" />
                 <WhatsAppIcon className="h-3.5 w-3.5" />
