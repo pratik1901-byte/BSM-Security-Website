@@ -211,7 +211,7 @@ export default function Hero() {
               </span>
             </p>
 
-            <p className="hero-sub mt-[clamp(0.9rem,2.6svh,1.75rem)] short-desktop:mt-2 max-w-xl text-justify text-[clamp(1rem,min(1.3vw,2.3svh),1.25rem)] leading-[1.6] text-mist">
+            <p className="hero-sub mt-[clamp(0.9rem,2.6svh,1.75rem)] short-desktop:mt-2 max-w-xl text-left sm:text-justify text-[clamp(1rem,min(1.3vw,2.3svh),1.25rem)] leading-[1.6] text-mist">
               BSM provides trained security personnel and managed protection across India — from
               beachfront resorts and gated communities to corporate offices, industrial estates
               and events. Local presence, written deployment plans, supervision you can verify.
