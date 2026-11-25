@@ -48,7 +48,7 @@ export default function Statement() {
           </h2>
 
           <div className="mt-12 grid gap-10 md:grid-cols-2">
-            <p data-reveal="up" className="text-lead text-left sm:text-justify text-mist">
+            <p data-reveal="up" className="text-lead text-justify hyphens-auto sm:hyphens-none text-mist">
               At BSM Security Agency, we believe that good security begins with the right people,
               proper planning and responsible management. We understand that every client and
               property has different security needs. That is why we take the time to understand
@@ -56,7 +56,7 @@ export default function Statement() {
               residential communities, commercial establishments, hotels, industries and other
               organisations.
             </p>
-            <p data-reveal="up" data-delay="0.08" className="text-lead text-left sm:text-justify text-mist">
+            <p data-reveal="up" data-delay="0.08" className="text-lead text-justify hyphens-auto sm:hyphens-none text-mist">
               Our responsibility goes beyond providing security personnel. We focus on proper
               training, clear duties, regular supervision and professional conduct. We believe in
               being accountable for our work, maintaining consistent service standards and

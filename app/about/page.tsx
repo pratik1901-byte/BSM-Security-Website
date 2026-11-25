@@ -41,7 +41,7 @@ export const metadata: Metadata = pageMetadata({
  * broken words (pro-fessional, independ-ent) read as cheap in a column this
  * wide, and the measure is generous enough to justify cleanly without it.
  */
-const prose = "text-left sm:text-justify";
+const prose = "text-justify hyphens-auto sm:hyphens-none";
 
 /** One frame per leader, in profile order. */
 const leaderShots = {

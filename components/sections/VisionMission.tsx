@@ -36,7 +36,7 @@ export default function VisionMission() {
               </span>
               <h2 className="mt-8 font-display text-display font-semibold text-bone">{item.title}</h2>
               <span className="mt-6 block h-0.5 w-16 rounded-full bg-brass transition-[width] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-28" aria-hidden="true" />
-              <p className="mt-8 max-w-xl text-lead leading-relaxed text-left sm:text-justify text-mist">{item.body}</p>
+              <p className="mt-8 max-w-xl text-lead leading-relaxed text-justify hyphens-auto sm:hyphens-none text-mist">{item.body}</p>
             </div>
           </article>
         ))}
