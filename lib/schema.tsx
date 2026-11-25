@@ -17,7 +17,7 @@ const orgId = abs("/#organization");
 /** "+91 94212 49677" → "+919421249677" */
 const e164 = (display: string) => display.replace(/[^\d+]/g, "");
 
-/** "Established in 2013 as a DGR-sponsored…" → "2013" */
+/** "Established in Goa in 2013 with DGR sponsorship…" → "2013" */
 const foundingYear = coreStrengths
   .map((s) => s.body.match(/\b(19|20)\d{2}\b/)?.[0])
   .find(Boolean);

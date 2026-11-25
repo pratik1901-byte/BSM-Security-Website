@@ -76,7 +76,10 @@ export default function CoreStrengths() {
                       featured ? "text-bone/90" : "text-mist"
                     }`}
                   >
-                    <Marked text={item.body} marks={["DGR-sponsored security agency"]} />
+                    <Marked
+                      text={item.body}
+                      marks={["DGR sponsorship", "independently managed private security agency"]}
+                    />
                   </p>
                 </li>
               );

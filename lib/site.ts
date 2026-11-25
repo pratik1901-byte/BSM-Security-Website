@@ -22,8 +22,18 @@ export const site = {
   name: "BSM",
   legalName: "BSM SECURITY AGENCY",
   tagline: "Protecting industries. Securing Businesses. Building Trust.",
+  /**
+   * The site-wide description: the root <head> default, the web manifest and
+   * the organisation in the structured data all read it.
+   *
+   * It says the DGR sponsorship in the past tense. BSM was established under
+   * it in 2013 and, on the completion of that tenure, continued under a
+   * Partnership Deed as an independent private agency (see lib/about) — so a
+   * line calling BSM a "DGR-sponsored security agency" today would describe
+   * the agency it used to be.
+   */
   description:
-    "DGR-sponsored security agency in Goa since 2013. Trained guards and managed protection for industry, PSUs, banks, hotels, societies and events.",
+    "Established in Goa in 2013 with DGR sponsorship, BSM Security Agency now operates as an independently managed private security agency, serving clients across India.",
   /**
    * The address the site is served from, and what every absolute URL is
    * built on: the canonical link, the sitemap, the structured data and the
@@ -596,7 +606,11 @@ export const coreStrengths = [
   {
     index: "02",
     title: "Established Agency",
-    body: "Established in 2013 as a DGR-sponsored security agency.",
+    /* The one card that carries the agency's standing, so it states both
+       halves of it: established in 2013 under DGR sponsorship, and
+       independently managed since that tenure ended. lib/schema reads the
+       founding year out of this line. */
+    body: "Established in Goa in 2013 with DGR sponsorship, BSM now operates as an independently managed private security agency, serving clients across India.",
   },
   {
     index: "03",

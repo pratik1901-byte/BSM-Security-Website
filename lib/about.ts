@@ -55,12 +55,18 @@ export const leaders: LeaderProfile[] = [
     designation: "Principal Partner – Security Operations & Management",
     paragraphs: [
       "With over three decades of experience in the security industry, Mr. Dattatray B. Naik has been associated with security operations and agency management since 1996. His extensive professional experience encompasses the establishment, administration and management of security agencies, industrial security operations and large-scale deployment of security personnel.",
-      "Throughout his career, he has been actively involved in the establishment, management and operations of various security agencies, including D.B Security Consultation Agency and Outsource Services, Hansa Security Agency, BSM Security Agency, CNP Security Agency, TA Security Agency, AG Security Agency and AC Security Agency. His professional journey has provided him with substantial exposure to managing security operations for major corporate establishments, industrial facilities and Public Sector Undertakings (PSUs).",
+      "Throughout his career, he has been actively involved in the establishment, management and operations of D.B Security Consultation Agency and Outsource Services, alongside BSM Security Agency and Hansa Security Agency. He has also provided professional consultancy services to several security agencies, including CNP Security Agency, TA Security Agency, AG Security Agency and AC Security Agency. His professional journey has provided him with substantial exposure to managing security operations for major corporate establishments, industrial facilities and Public Sector Undertakings (PSUs).",
       "As the Principal Partner of BSM Security Agency, he oversees security operations, organisational management and service delivery. His practical industry knowledge, operational expertise and leadership capabilities play a vital role in strengthening the agency’s operational standards and ensuring dependable security services.",
     ],
     marks: [
       "Mr. Dattatray B. Naik has been associated with security operations and agency management since 1996.",
-      "D.B Security Consultation Agency and Outsource Services, Hansa Security Agency, BSM Security Agency, CNP Security Agency, TA Security Agency, AG Security Agency and AC Security Agency",
+      // Three runs rather than one, so the sentence about consultancy work
+      // marks its own agencies. "BSM Security Agency" is deliberately not a
+      // mark on its own: it appears again in the closing paragraph, which
+      // should stay unmarked.
+      "D.B Security Consultation Agency and Outsource Services",
+      "BSM Security Agency and Hansa Security Agency",
+      "CNP Security Agency, TA Security Agency, AG Security Agency and AC Security Agency",
     ],
   },
   {
