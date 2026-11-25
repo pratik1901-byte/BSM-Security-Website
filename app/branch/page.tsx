@@ -58,7 +58,7 @@ export const metadata: Metadata = pageMetadata({
 /** One photograph per office. Shown only once BSM supplies it. */
 const officeShots = {
   "head-office": media.headOfficeCabinWide,
-  "branch-office-goa": media.branchOfficeCabin,
+  "branch-office-goa": media.branchOfficeManager,
 } as const;
 
 /** Turn-by-turn directions to an address, in Google Maps. */

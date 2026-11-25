@@ -937,6 +937,73 @@ select option:checked {
 }
 
 /* --------------------------------------------------------------------------
+   The menu hint
+
+   On a phone the whole navigation hides behind one small round button, and
+   nothing about it says so. This is the nudge: a bubble that pops out from
+   under it, rests with a slow bob, and goes away once the menu has been
+   opened — or by itself, so it never becomes furniture.
+
+   The pop and the bob both write `transform`, so they live on their own
+   element; the centring translate sits on the wrapper above it, where the
+   animation cannot overwrite it.
+   -------------------------------------------------------------------------- */
+@keyframes menu-hint-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(-7px) scale(0.84);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(3px) scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes menu-hint-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+.menu-hint {
+  animation:
+    menu-hint-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) both,
+    menu-hint-bob 2.6s ease-in-out 0.6s infinite;
+}
+
+/* A soft brass halo on the button itself, in time with the bob. */
+@keyframes menu-hint-halo {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+.menu-hint-halo {
+  animation: menu-hint-halo 2.6s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-hint,
+  .menu-hint-halo {
+    animation: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
    The pointer
 
    The site used to draw its own: a brass arrow, a ring over anything

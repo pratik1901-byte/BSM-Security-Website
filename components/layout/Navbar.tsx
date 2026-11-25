@@ -54,6 +54,44 @@ export default function Navbar() {
   const [menu, setMenu] = useState<MenuKey | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  /**
+   * The nudge under the menu button on a phone.
+   *
+   * Shown once a session and then never again, because a hint that keeps
+   * reappearing stops being a hint. It waits for the entrance to finish
+   * before appearing, retires the moment the menu is opened, and retires on
+   * its own after a few seconds if it is ignored.
+   */
+  const [menuHint, setMenuHint] = useState(false);
+
+  const retireHint = useCallback(() => {
+    setMenuHint(false);
+    try {
+      sessionStorage.setItem("bsm-menu-hint", "seen");
+    } catch {
+      /* private mode: the hint simply shows again next time */
+    }
+  }, []);
+
+  useEffect(() => {
+    let seen = false;
+    try {
+      seen = sessionStorage.getItem("bsm-menu-hint") === "seen";
+    } catch {
+      /* ignore */
+    }
+    if (seen) return;
+    const show = window.setTimeout(() => setMenuHint(true), 2600);
+    return () => window.clearTimeout(show);
+  }, []);
+
+  useEffect(() => {
+    if (!menuHint) return;
+    const hide = window.setTimeout(retireHint, 7000);
+    return () => window.clearTimeout(hide);
+  }, [menuHint, retireHint]);
+
+
   const listRef = useRef<HTMLUListElement>(null);
   const pillRef = useRef<HTMLSpanElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -475,12 +513,46 @@ export default function Navbar() {
               <button
                 ref={toggleRef}
                 type="button"
-                onClick={() => setMobileOpen((v) => !v)}
+                onClick={() => {
+                  /* Retired here rather than in an effect watching the open
+                     state: opening the menu is the event that answers the
+                     hint, and setState belongs in the handler for it. */
+                  retireHint();
+                  setMobileOpen((v) => !v);
+                }}
                 aria-expanded={mobileOpen}
                 aria-controls="mobile-menu"
                 className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-bone transition-colors duration-300 hover:border-brass xl:hidden"
               >
                 <span className="sr-only">{mobileOpen ? "Close menu" : "Open menu"}</span>
+
+                {/* The nudge. Decorative and inert: the button is already
+                    named for a screen reader, and this must never swallow
+                    the tap meant for it. Phones only — from a tablet up the
+                    bar has room to explain itself. */}
+                {menuHint && !mobileOpen && (
+                  <>
+                    <span
+                      aria-hidden="true"
+                      className="menu-hint-halo pointer-events-none absolute inset-0 rounded-full border border-brass/60 md:hidden"
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute left-1/2 top-full z-20 mt-3 -translate-x-1/2 md:hidden"
+                    >
+                      <span className="menu-hint block">
+                        <span className="relative block whitespace-nowrap rounded-full border border-brass/45 bg-void/95 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-brass shadow-[0_12px_30px_-12px_rgba(0,0,0,0.95)] backdrop-blur-sm">
+                          <span
+                            className="absolute -top-[5px] left-1/2 block h-2 w-2 -translate-x-1/2 rotate-45 border-l border-t border-brass/45 bg-void"
+                            aria-hidden="true"
+                          />
+                          Tap for menu
+                        </span>
+                      </span>
+                    </span>
+                  </>
+                )}
+
                 <span aria-hidden="true" className="relative block h-3 w-5">
                   <span
                     className={`absolute left-0 block h-px w-full bg-current transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
