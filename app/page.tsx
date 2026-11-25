@@ -15,7 +15,7 @@ export const metadata: Metadata = pageMetadata({
   absoluteTitle: true,
   title: "BSM Security Agency, Goa — Security Guards & Security Services in Goa",
   description:
-    "Established in Goa in 2013 with DGR sponsorship, BSM now operates as an independently managed private security agency, serving clients across India.",
+    "Established in Goa in 2013 with DGR sponsorship, now operates as an independently managed private security agency, serving clients across India.",
   keywords: [
     "private security services",
     "security guard services Goa",
