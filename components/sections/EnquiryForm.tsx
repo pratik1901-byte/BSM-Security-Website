@@ -28,28 +28,11 @@ const fieldCls =
 const labelCls = "block font-mono text-[10px] uppercase tracking-[0.2em] text-dim";
 
 /**
- * A GSTIN is fifteen characters. Rather than enforce the full grammar —
- * which would reject the perfectly valid identifiers issued to embassies and
- * other special registrations — this checks the length and that every
- * character is a letter or a digit, which is what catches a typed mistake
- * without standing in the way of a real number.
- */
-export function isGstNumber(value: string) {
-  return /^[0-9A-Z]{15}$/.test(value.toUpperCase());
-}
-
-/**
  * The enquiry template BSM receives. The visitor's details and enquiry are
  * filled in; anything they left blank stays as an empty line for them to
  * complete in their mail window before sending.
  */
-function enquiryEmail(
-  phone: string,
-  message: string,
-  service: string,
-  gst: string,
-  office: string,
-) {
+function enquiryEmail(phone: string, message: string, service: string, office: string) {
   const subject = `${service} — ${phone}`;
   const body = [
     "Dear BSM Security Agency,",
@@ -60,8 +43,7 @@ function enquiryEmail(
     "",
     `Service: ${service}`,
     `Contact number: ${phone}`,
-    `GST number: ${gst}`,
-    "Registered office:",
+    "Registered office / residential address:",
     office,
     "",
     "Enquiry:",
@@ -100,13 +82,9 @@ export default function EnquiryForm({
   children?: React.ReactNode;
 }) {
   const phoneRef = useRef<HTMLInputElement>(null);
-  const gstRef = useRef<HTMLInputElement>(null);
-  const officeRef = useRef<HTMLTextAreaElement>(null);
   const serviceRef = useRef<HTMLSelectElement>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [phoneError, setPhoneError] = useState("");
-  const [gstError, setGstError] = useState("");
-  const [officeError, setOfficeError] = useState("");
   const [blocked, setBlocked] = useState("");
 
   /**
@@ -124,17 +102,13 @@ export default function EnquiryForm({
   }, []);
 
   /**
-   * Reads and validates the required fields; null when any of them is not
-   * usable.
-   *
-   * Every field is checked before returning, so a visitor sees everything
-   * that needs fixing at once rather than discovering one more problem each
-   * time they press the button. Focus goes to the first of them.
+   * Reads and validates the contact number — the one field the enquiry cannot
+   * do without, since it is how BSM calls back. Null when it is not usable,
+   * and focus goes to it so the visitor lands on what needs fixing.
    */
   function read(form: HTMLFormElement) {
     const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
     const digits = (data.phone ?? "").replace(/\D/g, "");
-    const gst = (data.gst ?? "").trim().toUpperCase();
     const office = (data.office ?? "").trim();
 
     let phoneMsg = "";
@@ -142,37 +116,15 @@ export default function EnquiryForm({
     else if (!isIndianMobile(digits))
       phoneMsg = "Enter a 10-digit Indian mobile number, starting 6, 7, 8 or 9.";
 
-    let gstMsg = "";
-    if (!gst) gstMsg = "A GST number is required.";
-    else if (!isGstNumber(gst)) gstMsg = "A GST number is 15 letters and digits.";
-
-    const officeMsg = office ? "" : "A registered office address is required.";
-
     setPhoneError(phoneMsg);
-    setGstError(gstMsg);
-    setOfficeError(officeMsg);
 
     if (phoneMsg) {
       phoneRef.current?.focus();
       return null;
     }
-    if (gstMsg) {
-      gstRef.current?.focus();
-      return null;
-    }
-    if (officeMsg) {
-      officeRef.current?.focus();
-      return null;
-    }
 
     setBlocked("");
-    return enquiryEmail(
-      `+91${digits}`,
-      data.message ?? "",
-      data.service || GENERAL,
-      gst,
-      office,
-    );
+    return enquiryEmail(`+91${digits}`, data.message ?? "", data.service || GENERAL, office);
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -291,73 +243,16 @@ export default function EnquiryForm({
       </div>
 
       <div className={rowClass}>
-        <label htmlFor={`${idPrefix}-gst`} className={labelCls}>
-          GST Number <span className="text-brass">★ Required</span>
-        </label>
-        <input
-          ref={gstRef}
-          id={`${idPrefix}-gst`}
-          name="gst"
-          type="text"
-          inputMode="text"
-          autoComplete="off"
-          autoCapitalize="characters"
-          spellCheck={false}
-          maxLength={15}
-          required
-          aria-required="true"
-          aria-invalid={gstError ? true : undefined}
-          aria-describedby={gstError ? `${idPrefix}-gst-error` : `${idPrefix}-gst-hint`}
-          onChange={() => gstError && setGstError("")}
-          placeholder="15-character GST number"
-          className={`mt-3 uppercase placeholder:normal-case ${fieldCls} ${
-            gstError ? "!border-alert" : ""
-          }`}
-        />
-        {gstError ? (
-          <p
-            id={`${idPrefix}-gst-error`}
-            role="alert"
-            className="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-alert"
-          >
-            {gstError}
-          </p>
-        ) : (
-          <p
-            id={`${idPrefix}-gst-hint`}
-            className="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-dim"
-          >
-            15-character GSTIN
-          </p>
-        )}
-      </div>
-
-      <div className={rowClass}>
         <label htmlFor={`${idPrefix}-office`} className={labelCls}>
-          Registered Office <span className="text-brass">★ Required</span>
+          Registered office / Residential address
         </label>
         <textarea
-          ref={officeRef}
           id={`${idPrefix}-office`}
           name="office"
           rows={2}
-          required
-          aria-required="true"
-          aria-invalid={officeError ? true : undefined}
-          aria-describedby={officeError ? `${idPrefix}-office-error` : undefined}
-          onChange={() => officeError && setOfficeError("")}
-          placeholder="Registered office address"
-          className={`mt-3 resize-none ${fieldCls} ${officeError ? "!border-alert" : ""}`}
+          placeholder="Registered office or residential address"
+          className={`mt-3 resize-none ${fieldCls}`}
         />
-        {officeError && (
-          <p
-            id={`${idPrefix}-office-error`}
-            role="alert"
-            className="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-alert"
-          >
-            {officeError}
-          </p>
-        )}
       </div>
 
       <div className={rowClass}>

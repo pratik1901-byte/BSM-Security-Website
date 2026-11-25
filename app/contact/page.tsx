@@ -38,6 +38,19 @@ const officeLabelIcons = {
 } as const;
 
 /**
+ * The heading over each group of numbers in the call, WhatsApp and email
+ * cards. The Head Office carries a brass underline, the mark this site uses
+ * everywhere to pick it out as the principal desk; the Branch Office heading
+ * is otherwise identical.
+ */
+const officeLabelCls =
+  "font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brass";
+const headOfficeLabelCls = `${officeLabelCls} underline decoration-brass decoration-1 underline-offset-[5px]`;
+
+/** True for the Head Office, whose heading is the underlined one. */
+const isHeadOffice = (label: string) => label === offices[0].kind;
+
+/**
  * Email addresses by office. The Head Office answers two — its own and the
  * general enquiry address — so this cannot be read straight off offices[].
  * The order matches the footer.
@@ -94,7 +107,7 @@ export default function ContactPage() {
                   <li key={office.id}>
                     <div className="flex items-center gap-2">
                       {Icon && <Icon className="h-4 w-4 shrink-0 text-brass" strokeWidth={1.5} />}
-                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brass">
+                      <p className={isHeadOffice(office.kind) ? headOfficeLabelCls : officeLabelCls}>
                         {office.kind}
                       </p>
                     </div>
@@ -132,7 +145,7 @@ export default function ContactPage() {
                   <li key={line.href}>
                     <div className="flex items-center gap-2">
                       {Icon && <Icon className="h-4 w-4 shrink-0 text-brass" strokeWidth={1.5} />}
-                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brass">
+                      <p className={isHeadOffice(line.label) ? headOfficeLabelCls : officeLabelCls}>
                         {line.label}
                       </p>
                     </div>
@@ -170,7 +183,7 @@ const Icon = officeLabelIcons[group.label as keyof typeof officeLabelIcons];
                   <li key={group.label}>
                     <div className="flex items-center gap-2">
                       {Icon && <Icon className="h-4 w-4 shrink-0 text-brass" strokeWidth={1.5} />}
-                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brass">
+                      <p className={isHeadOffice(group.label) ? headOfficeLabelCls : officeLabelCls}>
                         {group.label}
                       </p>
                     </div>
