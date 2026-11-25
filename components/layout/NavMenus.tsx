@@ -540,7 +540,12 @@ function GalleryMenu({ onNavigate }: MenuProps) {
       <div className="grid grid-cols-3 gap-2">
         {galleryGroups.map((group) => {
           const items = gallery.filter((g) => g.group === group);
-          const cover = items.find((g) => g.shot?.src)?.shot;
+          /* Honours the same `cover` flag the gallery rail uses, so the
+             group is represented by one photograph in both places. These
+             cards are 16:10, so a group that opens on a portrait names a
+             landscape frame rather than having that portrait cropped. */
+          const withPhoto = items.filter((g) => g.shot?.src);
+          const cover = (withPhoto.find((g) => g.cover) ?? withPhoto[0])?.shot;
           return (
             <TransitionLink
               key={group}

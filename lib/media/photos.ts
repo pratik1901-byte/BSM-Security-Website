@@ -216,6 +216,20 @@ export const media = {
      BSM's own photographs of its officers at client sites: gate details,
      flag duty, muster, events. Each ratio below is the file's real shape,
      so the gallery frame never letterboxes or crops one of them. */
+  personnelGuardSalute: {
+    src: "/media/personnel/personnel-guard-salute.webp",
+    alt: "A BSM officer in cap and sunglasses saluting, standing on a kerbed path in front of a clipped hedge",
+    label: "Personnel — at the salute",
+    brief: "Supplied by BSM. An officer at the salute, full length.",
+    ratio: "3 / 4",
+  },
+  personnelGuardAtEase: {
+    src: "/media/personnel/personnel-guard-at-ease.webp",
+    alt: "A BSM officer standing at ease in cap, sunglasses and identification card, in front of a clipped hedge",
+    label: "Personnel — on parade",
+    brief: "Supplied by BSM. An officer standing at ease, full length.",
+    ratio: "3 / 4",
+  },
   personnelAirportTerminal: {
     src: "/media/personnel/personnel-airport-terminal.webp",
     alt: "A BSM detail drawn up inside an airport terminal beside the departure doors",

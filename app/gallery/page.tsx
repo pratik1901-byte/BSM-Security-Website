@@ -57,7 +57,12 @@ export default function GalleryPage() {
         >
           {galleryGroups.map((group, i) => {
             const items = gallery.filter((g) => g.group === group);
-            const cover = items.find((g) => g.shot?.src)?.shot;
+            /* A frame may be marked as the group's cover; otherwise the
+               first photograph stands in. The card is a wide letterbox, so
+               a group that opens on a portrait names a landscape frame here
+               rather than having that portrait cropped through the middle. */
+            const withPhoto = items.filter((g) => g.shot?.src);
+            const cover = (withPhoto.find((g) => g.cover) ?? withPhoto[0])?.shot;
             return (
               <TransitionLink
                 key={group}

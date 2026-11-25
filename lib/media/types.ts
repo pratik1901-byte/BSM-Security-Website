@@ -35,4 +35,13 @@ export type GalleryItem = {
    * is set for every entry that has a shot.
    */
   ratio?: string;
+  /**
+   * Use this frame on the group's card in the rail at the top of the page.
+   *
+   * Without it the rail takes whichever photograph comes first, which ties
+   * the order of the grid to the choice of cover. They are not the same
+   * decision: that card is a wide letterbox, so it wants a landscape frame,
+   * while the grid may well want to open with a portrait one.
+   */
+  cover?: boolean;
 };
