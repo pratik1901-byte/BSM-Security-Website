@@ -15,7 +15,11 @@ export const metadata: Metadata = pageMetadata({
   absoluteTitle: true,
   title: "BSM Security Agency, Goa — Security Guards & Security Services in Goa",
   description:
-    "Established in Goa in 2013 with DGR sponsorship, now operates as an independently managed private security agency, serving clients across India.",
+    /* 149 characters. Google shows about 155 on a desktop result and cuts
+       the rest, so the sentence is kept inside that: at BSM's own fuller
+       wording it broke mid-clause and lost "since 2026" — the part the
+       line exists to say. */
+    "BSM Security Agency was DGR-empanelled, Ministry of Defence, from 2013 to 2025 and has operated as an independent private security agency since 2026.",
   keywords: [
     "private security services",
     "security guard services Goa",
