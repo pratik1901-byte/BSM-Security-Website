@@ -587,7 +587,6 @@ export const offices: Office[] = [
         id: "pranali-v-shet",
         name: "Mrs. Pranali V Shet",
         role: "She heads Administration & Billing department - Panjim",
-        phone: { display: "+91 91086 63502", href: "tel:+919108663502" },
       },
     ],
   },
